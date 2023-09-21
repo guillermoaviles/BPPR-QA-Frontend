@@ -55,46 +55,10 @@ function AddProfiles() {
 
   const handleAddProfile = () => {
     setProfiles([...profiles, formData]);
-    setFormData({
-      environment: "",
-      intendedUse: "",
-      inUse: false,
-      profileUserId: "",
-      username: "",
-      pass: "",
-      email: "",
-      firstName: "",
-      lastName: "",
-      maidenName: "",
-      birthdate: "",
-      accountType: "",
-      accountSubType: "",
-      accountNumber: "",
-      accountNickname: "",
-      accountBalance: "",
-      personalInformationEmail: false,
-      personalInformationPhone: false,
-      personalInformationAddress: false,
-      personalInformationPassword: false,
-      personalInformationQuestions: false,
-      paymentMakePayments: false,
-      cancelFutureTransfer: false,
-      makeFuturePayment: false,
-      makeFutureTransfer: false,
-      deleteFuturePayment: false,
-      editFuturePayment: false,
-      onOffService: false,
-      addPayee: false,
-      nickname: "",
-      payeeName: "",
-      payeeAccountNumber: "",
-      ebill: false,
-    });
+    handleClearForm();
   };
 
-  const handleUploadProfiles = (event) => {
-    event.preventDefault();
-
+  const handleCreateProfiles = () => {
     axios
       .post("http://localhost:8080/api/profiles/import", profiles)
       .then((response) => {
@@ -105,6 +69,39 @@ function AddProfiles() {
           console.log("POST Failed");
         }
       });
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleCreateJSONs = () => {
+    axios
+      .post("http://localhost:8080/api/profiles/import/json", profiles)
+      .then((response) => {
+        console.log("POST response", response);
+        if (response.status === 201) {
+          //   handleGetProfiles();
+        } else {
+          console.log("POST Failed");
+        }
+      });
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleCreateBoth = () => {
+    handleCreateProfiles();
+    handleCreateJSONs();
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleDeleteProfile = (index) => {
+    const updatedProfiles = [...profiles];
+    updatedProfiles.splice(index, 1);
+    setProfiles(updatedProfiles);
+  };
+
+  const handleClearForm = () => {
     setFormData({
       environment: "",
       intendedUse: "",
@@ -140,16 +137,7 @@ function AddProfiles() {
       payeeAccountNumber: "",
       ebill: false,
     });
-    setProfiles([]);
   };
-
-  const handleDeleteProfile = (index) => {
-    const updatedProfiles = [...profiles];
-    updatedProfiles.splice(index, 1); // Remove the profile at the given index
-    setProfiles(updatedProfiles);
-  };
-
-  console.log("profiles", profiles);
 
   return (
     <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
@@ -526,7 +514,7 @@ function AddProfiles() {
           <>
             <button
               className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleUploadProfiles}
+              onClick={handleCreateProfiles}
             >
               {profiles.length > 1 ? (
                 <p>Create Profiles</p>
@@ -536,13 +524,13 @@ function AddProfiles() {
             </button>
             <button
               className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleUploadProfiles}
+              onClick={handleCreateJSONs}
             >
               {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
             </button>
             <button
               className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleUploadProfiles}
+              onClick={handleCreateBoth}
             >
               {profiles.length > 1 ? (
                 <p>Create Profiles & JSONs</p>
