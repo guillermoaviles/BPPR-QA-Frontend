@@ -65,31 +65,31 @@ function AddProfiles() {
   return (
     <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-semibold mb-4">
-        Add New Profiles Component
+        <span className="text-gray-700">Add New Profiles Component</span>
       </h1>
       <form className="space-y-4">
-        <label className="flex items-center justify-between">
-          Environment:
+        <label className="block">
+          <span className="text-gray-700">Environment:</span>
           <input
             type="text"
             name="environment"
             value={formData.environment}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Intended Use:
+        <label className="block">
+          <span className="text-gray-700">Intended Use:</span>
           <input
             type="text"
             name="intendedUse"
             value={formData.intendedUse}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          In Use:
+        <label className="block">
+          <span className="text-gray-700">In Use:</span>
           <input
             type="checkbox"
             name="inUse"
@@ -98,138 +98,142 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Profile User Id:
+        <label className="block">
+          <span className="text-gray-700">Profile User Id:</span>
           <input
             type="text"
             name="profileUserId"
             value={formData.profileUserId}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Username:
+        <label className="block">
+          <span className="text-gray-700">Username:</span>
+
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          pass:
+        <label className="block">
+          <span className="text-gray-700">Pass:</span>
+
           <input
             type="text"
             name="pass"
             value={formData.pass}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Email:
+        <label className="block">
+          <span className="text-gray-700">Email:</span>
           <input
             type="text"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          First Name:
+        <label className="block">
+          <span className="text-gray-700">First Name:</span>
           <input
             type="text"
             name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Last Name:
+        <label className="block">
+          <span className="text-gray-700">Last Name:</span>
           <input
             type="text"
             name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Maiden Name:
+        <label className="block">
+          <span className="text-gray-700">Maiden Name:</span>
+
           <input
             type="text"
             name="maidenName"
             value={formData.maidenName}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Birthdate:
+        <label className="block">
+          <span className="text-gray-700">Birthdate:</span>
+
           <input
             type="text"
             name="birthdate"
             value={formData.birthdate}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Account Type:
+        <label className="block">
+          <span className="text-gray-700">Account Type:</span>
           <input
             type="text"
-            name="birthdate"
-            value={formData.birthdate}
+            name="accountType"
+            value={formData.accountType}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Account Sub Type:
-          <input
-            type="text"
-            name="accountSubType"
-            value={formData.accountSubType}
-            onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
-          />
-        </label>
-        <label className="flex items-center justify-between">
-          Account Number:
+        <label className="block">
+          <span className="text-gray-700">Account Sub Type:</span>
           <input
             type="text"
             name="accountSubType"
             value={formData.accountSubType}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between block">
-          Account Nickname:
+        <label className="block">
+          <span className="text-gray-700">Account Number:</span>
+          <input
+            type="text"
+            name="accountNumber"
+            value={formData.accountNumber}
+            onChange={handleInputChange}
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+          />
+        </label>
+        <label className="block">
+          <span className="text-gray-700">Account Nickname:</span>
           <input
             type="text"
             name="accountNickname"
             value={formData.accountNickname}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Account Balance:
+        <label className="block">
+          <span className="text-gray-700">Account Balance:</span>
           <input
             type="text"
             name="accountBalance"
             value={formData.accountBalance}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Personal Information Email:
+        <label className="block">
+          <span className="text-gray-700">Personal Information Email:</span>
           <input
             type="checkbox"
             name="personalInformationEmail"
@@ -238,8 +242,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Personal Information Phone:
+        <label className="block">
+          <span className="text-gray-700">Personal Information Phone:</span>
           <input
             type="checkbox"
             name="personalInformationPhone"
@@ -248,8 +252,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Personal Information Address:
+        <label className="block">
+          <span className="text-gray-700">Personal Information Address:</span>
           <input
             type="checkbox"
             name="personalInformationAddress"
@@ -258,8 +262,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Personal Information Password:
+        <label className="block">
+          <span className="text-gray-700">Personal Information Password:</span>
           <input
             type="checkbox"
             name="personalInformationPassword"
@@ -268,8 +272,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Personal Information Questions:
+        <label className="block">
+          <span className="text-gray-700">Personal Information Questions:</span>
           <input
             type="checkbox"
             name="personalInformationQuestions"
@@ -278,8 +282,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Payment Make Payments:
+        <label className="block">
+          <span className="text-gray-700">Payment Make Payments:</span>
           <input
             type="checkbox"
             name="paymentMakePayments"
@@ -288,8 +292,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Cancel Future Transfer:
+        <label className="block">
+          <span className="text-gray-700">Cancel Future Transfer:</span>
           <input
             type="checkbox"
             name="cancelFutureTransfer"
@@ -298,8 +302,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Make Future Payment:
+        <label className="block">
+          <span className="text-gray-700">Make Future Payment:</span>
           <input
             type="checkbox"
             name="makeFuturePayment"
@@ -308,8 +312,9 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Make Future Transfer:
+        <label className="block">
+          <span className="text-gray-700">Make Future Transfer:</span>
+
           <input
             type="checkbox"
             name="makeFutureTransfer"
@@ -318,8 +323,9 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Delete Future Payment:
+        <label className="block">
+          <span className="text-gray-700">Delete Future Payment:</span>
+
           <input
             type="checkbox"
             name="deleteFuturePayment"
@@ -328,8 +334,9 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Edit Future Payment:
+        <label className="block">
+          <span className="text-gray-700">Edit Future Payment:</span>
+
           <input
             type="checkbox"
             name="editFuturePayment"
@@ -338,8 +345,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          On/Off Service:
+        <label className="block">
+          <span className="text-gray-700">On/Off Service:</span>
           <input
             type="checkbox"
             name="onOffService"
@@ -348,8 +355,8 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Add Payee:
+        <label className="block">
+          <span className="text-gray-700">Add Payee:</span>
           <input
             type="checkbox"
             name="addPayee"
@@ -358,38 +365,38 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Nickname:
+        <label className="block">
+          <span className="text-gray-700">Nickname:</span>
           <input
             type="text"
             name="nickname"
             value={formData.nickname}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Payee Name:
+        <label className="block">
+          <span className="text-gray-700">Payee Name:</span>
           <input
             type="text"
             name="payeeName"
             value={formData.payeeName}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          Payee Account Number:
+        <label className="block">
+          <span className="text-gray-700">Payee Account Number:</span>
           <input
             type="text"
             name="payeeAccountNumber"
             value={formData.payeeAccountNumber}
             onChange={handleInputChange}
-            className="w-full border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
-        <label className="flex items-center justify-between">
-          E-Bill:
+        <label className="block">
+          <span className="text-gray-700">E-Bill:</span>
           <input
             type="checkbox"
             name="ebill"
