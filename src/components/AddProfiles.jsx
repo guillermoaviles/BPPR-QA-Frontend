@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 function AddProfiles() {
+  const [profiles, setProfiles] = useState([]);
   const [formData, setFormData] = useState({
     environment: "",
     intendedUse: "",
@@ -47,11 +48,50 @@ function AddProfiles() {
     }));
   };
 
-  const handleAddProfile = (event) => {
+  const handleAddProfile = () => {
+    setProfiles([...profiles, formData]);
+    setFormData({
+      environment: "",
+      intendedUse: "",
+      inUse: false,
+      profileUserId: "",
+      username: "",
+      pass: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      maidenName: "",
+      birthdate: "",
+      accountType: "",
+      accountSubType: "",
+      accountNumber: "",
+      accountNickname: "",
+      accountBalance: "",
+      personalInformationEmail: false,
+      personalInformationPhone: false,
+      personalInformationAddress: false,
+      personalInformationPassword: false,
+      personalInformationQuestions: false,
+      paymentMakePayments: false,
+      cancelFutureTransfer: false,
+      makeFuturePayment: false,
+      makeFutureTransfer: false,
+      deleteFuturePayment: false,
+      editFuturePayment: false,
+      onOffService: false,
+      addPayee: false,
+      nickname: "",
+      payeeName: "",
+      payeeAccountNumber: "",
+      ebill: false,
+    });
+  };
+
+  const handleUploadProfiles = (event) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost:8080/api/profiles/new", formData)
+      .post("http://localhost:8080/api/profiles/import", profiles)
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
@@ -60,7 +100,51 @@ function AddProfiles() {
           console.log("POST Failed");
         }
       });
+    setFormData({
+      environment: "",
+      intendedUse: "",
+      inUse: false,
+      profileUserId: "",
+      username: "",
+      pass: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      maidenName: "",
+      birthdate: "",
+      accountType: "",
+      accountSubType: "",
+      accountNumber: "",
+      accountNickname: "",
+      accountBalance: "",
+      personalInformationEmail: false,
+      personalInformationPhone: false,
+      personalInformationAddress: false,
+      personalInformationPassword: false,
+      personalInformationQuestions: false,
+      paymentMakePayments: false,
+      cancelFutureTransfer: false,
+      makeFuturePayment: false,
+      makeFutureTransfer: false,
+      deleteFuturePayment: false,
+      editFuturePayment: false,
+      onOffService: false,
+      addPayee: false,
+      nickname: "",
+      payeeName: "",
+      payeeAccountNumber: "",
+      ebill: false,
+    });
+    setProfiles([]);
   };
+
+  const handleDeleteProfile = (index) => {
+    const updatedProfiles = [...profiles];
+    updatedProfiles.splice(index, 1); // Remove the profile at the given index
+    setProfiles(updatedProfiles);
+  };
+
+  console.log("profiles", profiles);
 
   return (
     <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
@@ -412,6 +496,49 @@ function AddProfiles() {
       >
         Add
       </button>
+      <div>
+        <div>
+          {profiles?.map((profile, index) => (
+            <div key={index}>
+              <div>
+                <h3>Profile ID: {profile.profileUserId}</h3>
+                <h3>Account Type: {profile.accountType}</h3>
+              </div>
+              <button onClick={() => handleDeleteProfile(index)}>Delete</button>
+            </div>
+          ))}
+        </div>
+        {profiles.length > 0 && (
+          <>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleUploadProfiles}
+            >
+              {profiles.length > 1 ? (
+                <p>Create Profiles</p>
+              ) : (
+                <p>Create Profile</p>
+              )}
+            </button>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleUploadProfiles}
+            >
+              {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
+            </button>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleUploadProfiles}
+            >
+              {profiles.length > 1 ? (
+                <p>Create Profiles & JSONs</p>
+              ) : (
+                <p>Create Profile & JSON</p>
+              )}
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
