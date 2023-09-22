@@ -23,6 +23,7 @@ import {
 } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon";
 import { LockIcon } from "../assets/LockIcon";
+import avatar from "../assets/avatar.png"
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
@@ -51,13 +52,13 @@ function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {profiles?.map((profile) => {
           return (
-            <Card className="max-w-[500px]">
+            <Card key={profile.id} className="max-w-[500px]">
               <CardHeader className="flex gap-3">
                 <Image
                   alt="nextui logo"
                   height={40}
                   radius="sm"
-                  src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                  src={avatar}
                   width={40}
                 />
                 <div className="flex flex-col">
