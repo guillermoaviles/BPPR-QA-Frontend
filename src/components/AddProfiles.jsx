@@ -1,5 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Checkbox,
+  Input,
+} from "@nextui-org/react";
 
 function AddProfiles() {
   const [profiles, setProfiles] = useState([]);
@@ -39,7 +50,7 @@ function AddProfiles() {
     payeeAccountNumber: "",
     ebill: false,
   });
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
     // Update the form data based on the input type
@@ -140,406 +151,395 @@ function AddProfiles() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-semibold mb-4">
-        <span className="text-gray-700">Add New Profiles</span>
-      </h1>
-      <form className="space-y-4">
-        <label className="block">
-          <span className="text-gray-700">Environment:</span>
-          <input
-            type="text"
-            name="environment"
-            value={formData.environment}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Intended Use:</span>
-          <input
-            type="text"
-            name="intendedUse"
-            value={formData.intendedUse}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">In Use:</span>
-          <input
-            type="checkbox"
-            name="inUse"
-            checked={formData.inUse}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Profile User Id:</span>
-          <input
-            type="text"
-            name="profileUserId"
-            value={formData.profileUserId}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Username:</span>
-
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Pass:</span>
-
-          <input
-            type="text"
-            name="pass"
-            value={formData.pass}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Email:</span>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">First Name:</span>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Last Name:</span>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Maiden Name:</span>
-
-          <input
-            type="text"
-            name="maidenName"
-            value={formData.maidenName}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Birthdate:</span>
-
-          <input
-            type="text"
-            name="birthdate"
-            value={formData.birthdate}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Account Type:</span>
-          <input
-            type="text"
-            name="accountType"
-            value={formData.accountType}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Account Sub Type:</span>
-          <input
-            type="text"
-            name="accountSubType"
-            value={formData.accountSubType}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Account Number:</span>
-          <input
-            type="text"
-            name="accountNumber"
-            value={formData.accountNumber}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Account Nickname:</span>
-          <input
-            type="text"
-            name="accountNickname"
-            value={formData.accountNickname}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Account Balance:</span>
-          <input
-            type="text"
-            name="accountBalance"
-            value={formData.accountBalance}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Personal Information Email:</span>
-          <input
-            type="checkbox"
-            name="personalInformationEmail"
-            checked={formData.personalInformationEmail}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Personal Information Phone:</span>
-          <input
-            type="checkbox"
-            name="personalInformationPhone"
-            checked={formData.personalInformationPhone}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Personal Information Address:</span>
-          <input
-            type="checkbox"
-            name="personalInformationAddress"
-            checked={formData.personalInformationAddress}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Personal Information Password:</span>
-          <input
-            type="checkbox"
-            name="personalInformationPassword"
-            checked={formData.personalInformationPassword}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Personal Information Questions:</span>
-          <input
-            type="checkbox"
-            name="personalInformationQuestions"
-            checked={formData.personalInformationQuestions}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Payment Make Payments:</span>
-          <input
-            type="checkbox"
-            name="paymentMakePayments"
-            checked={formData.paymentMakePayments}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Cancel Future Transfer:</span>
-          <input
-            type="checkbox"
-            name="cancelFutureTransfer"
-            checked={formData.cancelFutureTransfer}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Make Future Payment:</span>
-          <input
-            type="checkbox"
-            name="makeFuturePayment"
-            checked={formData.makeFuturePayment}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Make Future Transfer:</span>
-
-          <input
-            type="checkbox"
-            name="makeFutureTransfer"
-            checked={formData.makeFutureTransfer}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Delete Future Payment:</span>
-
-          <input
-            type="checkbox"
-            name="deleteFuturePayment"
-            checked={formData.deleteFuturePayment}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Edit Future Payment:</span>
-
-          <input
-            type="checkbox"
-            name="editFuturePayment"
-            checked={formData.editFuturePayment}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">On/Off Service:</span>
-          <input
-            type="checkbox"
-            name="onOffService"
-            checked={formData.onOffService}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Add Payee:</span>
-          <input
-            type="checkbox"
-            name="addPayee"
-            checked={formData.addPayee}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
-        {showPayeeFields && (
-          <>
-            <label className="block">
-              <span className="text-gray-700">Nickname:</span>
-              <input
-                type="text"
-                name="nickname"
-                value={formData.nickname}
-                onChange={handleInputChange}
-                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Payee Name:</span>
-              <input
-                type="text"
-                name="payeeName"
-                value={formData.payeeName}
-                onChange={handleInputChange}
-                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Payee Account Number:</span>
-              <input
-                type="text"
-                name="payeeAccountNumber"
-                value={formData.payeeAccountNumber}
-                onChange={handleInputChange}
-                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">E-Bill:</span>
-              <input
-                type="checkbox"
-                name="ebill"
-                checked={formData.ebill}
-                onChange={handleInputChange}
-                className="ml-2"
-              />
-            </label>
-          </>
-        )}
-      </form>
-      <button
-        className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-        onClick={handleAddProfile}
+    <div>
+      <Button onPress={onOpen} color="primary">
+        Add Profile
+      </Button>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        scrollBehavior="outside"
       >
-        Add
-      </button>
-      <div>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Add Profile</ModalHeader>
+              <ModalBody>
+                <form className="space-y-4">
+                  <label className="block">
+                    <span className="text-gray-700">Environment:</span>
+                    <Input
+                      type="text"
+                      name="environment"
+                      value={formData.environment}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Intended Use:</span>
+                    <Input
+                      type="text"
+                      name="intendedUse"
+                      value={formData.intendedUse}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">In Use: </span>
+                    <Checkbox
+                      name="inUse"
+                      checked={formData.inUse}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Profile User Id:</span>
+                    <Input
+                      type="text"
+                      name="profileUserId"
+                      value={formData.profileUserId}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Username:</span>
+                    <Input
+                      type="text"
+                      name="username"
+                      value={formData.username}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Pass:</span>
+                    <Input
+                      type="text"
+                      name="pass"
+                      value={formData.pass}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Email:</span>
+                    <Input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">First Name:</span>
+                    <Input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Last Name:</span>
+                    <Input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Maiden Name:</span>
+                    <Input
+                      type="text"
+                      name="maidenName"
+                      value={formData.maidenName}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Birthdate:</span>
+                    <Input
+                      type="text"
+                      name="birthdate"
+                      value={formData.birthdate}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Account Type:</span>
+                    <Input
+                      type="text"
+                      name="accountType"
+                      value={formData.accountType}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Account Sub Type:</span>
+                    <Input
+                      type="text"
+                      name="accountSubType"
+                      value={formData.accountSubType}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Account Number:</span>
+                    <Input
+                      type="text"
+                      name="accountNumber"
+                      value={formData.accountNumber}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Account Nickname:</span>
+                    <Input
+                      type="text"
+                      name="accountNickname"
+                      value={formData.accountNickname}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-700">Account Balance:</span>
+                    <Input
+                      type="text"
+                      name="accountBalance"
+                      value={formData.accountBalance}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Personal Information Email:
+                    </span>
+                    <Checkbox
+                      name="personalInformationEmail"
+                      checked={formData.personalInformationEmail}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Personal Information Phone:
+                    </span>
+                    <Checkbox
+                      name="personalInformationPhone"
+                      checked={formData.personalInformationPhone}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Personal Information Address:
+                    </span>
+                    <Checkbox
+                      name="personalInformationAddress"
+                      checked={formData.personalInformationAddress}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Personal Information Password:
+                    </span>
+                    <Checkbox
+                      name="personalInformationPassword"
+                      checked={formData.personalInformationPassword}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Personal Information Questions:
+                    </span>
+                    <Checkbox
+                      name="personalInformationQuestions"
+                      checked={formData.personalInformationQuestions}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Payment Make Payments:
+                    </span>
+                    <Checkbox
+                      name="paymentMakePayments"
+                      checked={formData.paymentMakePayments}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Cancel Future Transfer:
+                    </span>
+                    <Checkbox
+                      name="cancelFutureTransfer"
+                      checked={formData.cancelFutureTransfer}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">Make Future Payment:</span>
+                    <Checkbox
+                      name="makeFuturePayment"
+                      checked={formData.makeFuturePayment}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">Make Future Transfer:</span>
+                    <Checkbox
+                      name="makeFutureTransfer"
+                      checked={formData.makeFutureTransfer}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">
+                      Delete Future Payment:
+                    </span>
+                    <Checkbox
+                      name="deleteFuturePayment"
+                      checked={formData.deleteFuturePayment}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">Edit Future Payment:</span>
+                    <Checkbox
+                      name="editFuturePayment"
+                      checked={formData.editFuturePayment}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">On/Off Service:</span>
+                    <Checkbox
+                      name="onOffService"
+                      checked={formData.onOffService}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">Add Payee:</span>
+                    <Checkbox
+                      name="addPayee"
+                      checked={formData.addPayee}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  {showPayeeFields && (
+                    <>
+                      <label className="block">
+                        <span className="text-gray-700">Nickname:</span>
+                        <Input
+                          type="text"
+                          name="nickname"
+                          value={formData.nickname}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-gray-700">Payee Name:</span>
+                        <Input
+                          type="text"
+                          name="payeeName"
+                          value={formData.payeeName}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-gray-700">
+                          Payee Account Number:
+                        </span>
+                        <Input
+                          type="text"
+                          name="payeeAccountNumber"
+                          value={formData.payeeAccountNumber}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                      <label className="block flex justify-between items-center">
+                        <span className="text-gray-700">E-Bill:</span>
+                        <Checkbox
+                          name="ebill"
+                          checked={formData.ebill}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                    </>
+                  )}
+                </form>
+              </ModalBody>
+              <ModalFooter>
+                <Button auto onClick={onClose} color="danger">
+                  Cancel
+                </Button>
+                <Button
+                  auto
+                  color="success"
+                  onClick={() => {
+                    handleAddProfile();
+                    onClose();
+                  }}
+                >
+                  Add Profile
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
         <div>
-          {profiles?.map((profile, index) => (
-            <div key={index}>
-              <div>
-                <h3>Profile ID: {profile.profileUserId}</h3>
-                <h3>Account Type: {profile.accountType}</h3>
+          <div>
+            {profiles?.map((profile, index) => (
+              <div key={index}>
+                <div>
+                  <h3>Profile ID: {profile.profileUserId}</h3>
+                  <h3>Account Type: {profile.accountType}</h3>
+                </div>
+                <button
+                  className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                  onClick={() => handleDeleteProfile(index)}
+                >
+                  Delete
+                </button>
               </div>
+            ))}
+          </div>
+          {profiles.length > 0 && (
+            <>
               <button
                 className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-                onClick={() => handleDeleteProfile(index)}
+                onClick={handleCreateProfiles}
               >
-                Delete
+                {profiles.length > 1 ? (
+                  <p>Create Profiles</p>
+                ) : (
+                  <p>Create Profile</p>
+                )}
               </button>
-            </div>
-          ))}
+              <button
+                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                onClick={handleCreateJSONs}
+              >
+                {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
+              </button>
+              <button
+                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                onClick={handleCreateBoth}
+              >
+                {profiles.length > 1 ? (
+                  <p>Create Profiles & JSONs</p>
+                ) : (
+                  <p>Create Profile & JSON</p>
+                )}
+              </button>
+            </>
+          )}
         </div>
-        {profiles.length > 0 && (
-          <>
-            <button
-              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleCreateProfiles}
-            >
-              {profiles.length > 1 ? (
-                <p>Create Profiles</p>
-              ) : (
-                <p>Create Profile</p>
-              )}
-            </button>
-            <button
-              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleCreateJSONs}
-            >
-              {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
-            </button>
-            <button
-              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-              onClick={handleCreateBoth}
-            >
-              {profiles.length > 1 ? (
-                <p>Create Profiles & JSONs</p>
-              ) : (
-                <p>Create Profile & JSON</p>
-              )}
-            </button>
-          </>
-        )}
       </div>
     </div>
   );
