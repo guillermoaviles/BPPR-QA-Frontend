@@ -537,7 +537,7 @@ function AddProfiles() {
                   <CardFooter>
                     <Button color="primary">Edit</Button>
                     <Button
-                      className="text-white bg-danger cursor-pointer"
+                      className="text-white bg-danger cursor-pointer left-3"
                       onClick={() => handleDeleteProfile(index)}
                     >
                       Delete
@@ -547,9 +547,9 @@ function AddProfiles() {
               ))}
             </div>
             {profiles.length > 0 && (
-              <div className="flex flex-col mt-4">
+              <div className="flex flex-col mt-4 p-4">
                 <Button
-                  className="text-white py-2 px-4 rounded-full cursor-pointer"
+                  className="text-white cursor-pointer"
                   onClick={handleCreateProfiles}
                 >
                   {profiles.length > 1 ? (
@@ -559,7 +559,7 @@ function AddProfiles() {
                   )}
                 </Button>
                 <Button
-                  className="mt-4 text-white py-2 px-4 rounded-full cursor-pointer"
+                  className="text-white cursor-pointer top-1"
                   onClick={handleCreateJSONs}
                 >
                   {profiles.length > 1 ? (
@@ -569,7 +569,7 @@ function AddProfiles() {
                   )}
                 </Button>
                 <Button
-                  className="mt-4 text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                  className="text-white cursor-pointer bottom-button"
                   onClick={handleCreateBoth}
                 >
                   {profiles.length > 1 ? (
