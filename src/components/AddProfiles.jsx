@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 
 function AddProfiles() {
+  const [profiles, setProfiles] = useState([]);
+  const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [formData, setFormData] = useState({
     environment: "",
     intendedUse: "",
@@ -45,13 +47,20 @@ function AddProfiles() {
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    if (name === "addPayee") {
+      setShowPayeeFields(checked);
+    }
   };
 
-  const handleAddProfile = (event) => {
-    event.preventDefault();
+  const handleAddProfile = () => {
+    setProfiles([...profiles, formData]);
+    handleClearForm();
+  };
 
+  const handleCreateProfiles = () => {
     axios
-      .post("http://localhost:8080/api/profiles/new", formData)
+      .post("http://localhost:8080/api/profiles/import", profiles)
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
@@ -60,12 +69,80 @@ function AddProfiles() {
           console.log("POST Failed");
         }
       });
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleCreateJSONs = () => {
+    axios
+      .post("http://localhost:8080/api/profiles/import/json", profiles)
+      .then((response) => {
+        console.log("POST response", response);
+        if (response.status === 201) {
+          //   handleGetProfiles();
+        } else {
+          console.log("POST Failed");
+        }
+      });
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleCreateBoth = () => {
+    handleCreateProfiles();
+    handleCreateJSONs();
+    handleClearForm();
+    setProfiles([]);
+  };
+
+  const handleDeleteProfile = (index) => {
+    const updatedProfiles = [...profiles];
+    updatedProfiles.splice(index, 1);
+    setProfiles(updatedProfiles);
+  };
+
+  const handleClearForm = () => {
+    setFormData({
+      environment: "",
+      intendedUse: "",
+      inUse: false,
+      profileUserId: "",
+      username: "",
+      pass: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      maidenName: "",
+      birthdate: "",
+      accountType: "",
+      accountSubType: "",
+      accountNumber: "",
+      accountNickname: "",
+      accountBalance: "",
+      personalInformationEmail: false,
+      personalInformationPhone: false,
+      personalInformationAddress: false,
+      personalInformationPassword: false,
+      personalInformationQuestions: false,
+      paymentMakePayments: false,
+      cancelFutureTransfer: false,
+      makeFuturePayment: false,
+      makeFutureTransfer: false,
+      deleteFuturePayment: false,
+      editFuturePayment: false,
+      onOffService: false,
+      addPayee: false,
+      nickname: "",
+      payeeName: "",
+      payeeAccountNumber: "",
+      ebill: false,
+    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-semibold mb-4">
-        <span className="text-gray-700">Add New Profiles Component</span>
+        <span className="text-gray-700">Add New Profiles</span>
       </h1>
       <form className="space-y-4">
         <label className="block">
@@ -75,7 +152,7 @@ function AddProfiles() {
             name="environment"
             value={formData.environment}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -85,7 +162,7 @@ function AddProfiles() {
             name="intendedUse"
             value={formData.intendedUse}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -105,7 +182,7 @@ function AddProfiles() {
             name="profileUserId"
             value={formData.profileUserId}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -116,7 +193,7 @@ function AddProfiles() {
             name="username"
             value={formData.username}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -127,7 +204,7 @@ function AddProfiles() {
             name="pass"
             value={formData.pass}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -137,7 +214,7 @@ function AddProfiles() {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -147,7 +224,7 @@ function AddProfiles() {
             name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -157,7 +234,7 @@ function AddProfiles() {
             name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -168,7 +245,7 @@ function AddProfiles() {
             name="maidenName"
             value={formData.maidenName}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -179,7 +256,7 @@ function AddProfiles() {
             name="birthdate"
             value={formData.birthdate}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -189,7 +266,7 @@ function AddProfiles() {
             name="accountType"
             value={formData.accountType}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -199,7 +276,7 @@ function AddProfiles() {
             name="accountSubType"
             value={formData.accountSubType}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -209,7 +286,7 @@ function AddProfiles() {
             name="accountNumber"
             value={formData.accountNumber}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -219,7 +296,7 @@ function AddProfiles() {
             name="accountNickname"
             value={formData.accountNickname}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -229,7 +306,7 @@ function AddProfiles() {
             name="accountBalance"
             value={formData.accountBalance}
             onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </label>
         <label className="block">
@@ -365,46 +442,50 @@ function AddProfiles() {
             className="ml-2"
           />
         </label>
-        <label className="block">
-          <span className="text-gray-700">Nickname:</span>
-          <input
-            type="text"
-            name="nickname"
-            value={formData.nickname}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Payee Name:</span>
-          <input
-            type="text"
-            name="payeeName"
-            value={formData.payeeName}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Payee Account Number:</span>
-          <input
-            type="text"
-            name="payeeAccountNumber"
-            value={formData.payeeAccountNumber}
-            onChange={handleInputChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">E-Bill:</span>
-          <input
-            type="checkbox"
-            name="ebill"
-            checked={formData.ebill}
-            onChange={handleInputChange}
-            className="ml-2"
-          />
-        </label>
+        {showPayeeFields && (
+          <>
+            <label className="block">
+              <span className="text-gray-700">Nickname:</span>
+              <input
+                type="text"
+                name="nickname"
+                value={formData.nickname}
+                onChange={handleInputChange}
+                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+              />
+            </label>
+            <label className="block">
+              <span className="text-gray-700">Payee Name:</span>
+              <input
+                type="text"
+                name="payeeName"
+                value={formData.payeeName}
+                onChange={handleInputChange}
+                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+              />
+            </label>
+            <label className="block">
+              <span className="text-gray-700">Payee Account Number:</span>
+              <input
+                type="text"
+                name="payeeAccountNumber"
+                value={formData.payeeAccountNumber}
+                onChange={handleInputChange}
+                className="mt-1 p-2 block w-full rounded-md border-gray-300 border-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
+              />
+            </label>
+            <label className="block">
+              <span className="text-gray-700">E-Bill:</span>
+              <input
+                type="checkbox"
+                name="ebill"
+                checked={formData.ebill}
+                onChange={handleInputChange}
+                className="ml-2"
+              />
+            </label>
+          </>
+        )}
       </form>
       <button
         className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
@@ -412,6 +493,54 @@ function AddProfiles() {
       >
         Add
       </button>
+      <div>
+        <div>
+          {profiles?.map((profile, index) => (
+            <div key={index}>
+              <div>
+                <h3>Profile ID: {profile.profileUserId}</h3>
+                <h3>Account Type: {profile.accountType}</h3>
+              </div>
+              <button
+                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                onClick={() => handleDeleteProfile(index)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+        {profiles.length > 0 && (
+          <>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleCreateProfiles}
+            >
+              {profiles.length > 1 ? (
+                <p>Create Profiles</p>
+              ) : (
+                <p>Create Profile</p>
+              )}
+            </button>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleCreateJSONs}
+            >
+              {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
+            </button>
+            <button
+              className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              onClick={handleCreateBoth}
+            >
+              {profiles.length > 1 ? (
+                <p>Create Profiles & JSONs</p>
+              ) : (
+                <p>Create Profile & JSON</p>
+              )}
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
