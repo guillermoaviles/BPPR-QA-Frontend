@@ -491,28 +491,29 @@ function AddProfiles() {
           )}
         </ModalContent>
       </Modal>
-      <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
+      <div className="flex justify-center min-h-screen bg-gray-100">
+      <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
         <div>
           <div>
             {profiles?.map((profile, index) => (
-              <div key={index}>
+              <div key={index} className="mb-4" >
                 <div>
                   <h3>Profile ID: {profile.profileUserId}</h3>
                   <h3>Account Type: {profile.accountType}</h3>
                 </div>
-                <button
-                  className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                <Button
+                  className="text-white bg-danger cursor-pointer"
                   onClick={() => handleDeleteProfile(index)}
                 >
                   Delete
-                </button>
+                </Button>
               </div>
             ))}
           </div>
           {profiles.length > 0 && (
-            <>
-              <button
-                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+            <div className="flex flex-col mt-4">
+              <Button
+                className="text-white py-2 px-4 rounded-full cursor-pointer"
                 onClick={handleCreateProfiles}
               >
                 {profiles.length > 1 ? (
@@ -520,15 +521,15 @@ function AddProfiles() {
                 ) : (
                   <p>Create Profile</p>
                 )}
-              </button>
-              <button
-                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              </Button>
+              <Button
+                className="mt-4 text-white py-2 px-4 rounded-full cursor-pointer"
                 onClick={handleCreateJSONs}
               >
                 {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
-              </button>
-              <button
-                className="mt-4 bg-[#005596] text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+              </Button>
+              <Button
+                className="mt-4 text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
                 onClick={handleCreateBoth}
               >
                 {profiles.length > 1 ? (
@@ -536,10 +537,11 @@ function AddProfiles() {
                 ) : (
                   <p>Create Profile & JSON</p>
                 )}
-              </button>
-            </>
+              </Button>
+            </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
