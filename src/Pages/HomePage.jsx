@@ -16,7 +16,7 @@ function HomePage() {
 
         const profiles = profileResponse.data;
 
-        setProfiles(profiles);
+        setProfiles(profiles.slice(0, 6));
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
