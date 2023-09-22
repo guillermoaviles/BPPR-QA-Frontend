@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
   Modal,
   ModalContent,
   ModalHeader,
@@ -10,7 +15,10 @@ import {
   useDisclosure,
   Checkbox,
   Input,
+  Link,
+  Image,
 } from "@nextui-org/react";
+import avatar from "../assets/avatar.png";
 
 function AddProfiles() {
   const [profiles, setProfiles] = useState([]);
@@ -492,56 +500,88 @@ function AddProfiles() {
         </ModalContent>
       </Modal>
       <div className="flex justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
-        <div>
+        <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
           <div>
-            {profiles?.map((profile, index) => (
-              <div key={index} className="mb-4" >
-                <div>
-                  <h3>Profile ID: {profile.profileUserId}</h3>
-                  <h3>Account Type: {profile.accountType}</h3>
-                </div>
+            <div>
+              {profiles?.map((profile, index) => (
+                <Card key={profile.id} className="card">
+                  <CardHeader className="flex gap-3">
+                    <Image
+                      alt="nextui logo"
+                      height={40}
+                      radius="sm"
+                      src={avatar}
+                      width={40}
+                    />
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">
+                        Profile User Id:
+                      </div>
+                      <div>{" " + profile.profileUserId}</div>
+                    </div>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">Username:</div>
+                      <div>{profile.username}</div>
+                    </div>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">
+                        Account Type:
+                      </div>
+                      <div>{profile.accountType}</div>
+                    </div>
+                  </CardBody>
+                  <Divider />
+                  <CardFooter>
+                    <Button color="primary">Edit</Button>
+                    <Button
+                      className="text-white bg-danger cursor-pointer"
+                      onClick={() => handleDeleteProfile(index)}
+                    >
+                      Delete
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+            {profiles.length > 0 && (
+              <div className="flex flex-col mt-4">
                 <Button
-                  className="text-white bg-danger cursor-pointer"
-                  onClick={() => handleDeleteProfile(index)}
+                  className="text-white py-2 px-4 rounded-full cursor-pointer"
+                  onClick={handleCreateProfiles}
                 >
-                  Delete
+                  {profiles.length > 1 ? (
+                    <p>Create Profiles</p>
+                  ) : (
+                    <p>Create Profile</p>
+                  )}
+                </Button>
+                <Button
+                  className="mt-4 text-white py-2 px-4 rounded-full cursor-pointer"
+                  onClick={handleCreateJSONs}
+                >
+                  {profiles.length > 1 ? (
+                    <p>Create JSONs</p>
+                  ) : (
+                    <p>Create JSON</p>
+                  )}
+                </Button>
+                <Button
+                  className="mt-4 text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                  onClick={handleCreateBoth}
+                >
+                  {profiles.length > 1 ? (
+                    <p>Create Profiles & JSONs</p>
+                  ) : (
+                    <p>Create Profile & JSON</p>
+                  )}
                 </Button>
               </div>
-            ))}
+            )}
           </div>
-          {profiles.length > 0 && (
-            <div className="flex flex-col mt-4">
-              <Button
-                className="text-white py-2 px-4 rounded-full cursor-pointer"
-                onClick={handleCreateProfiles}
-              >
-                {profiles.length > 1 ? (
-                  <p>Create Profiles</p>
-                ) : (
-                  <p>Create Profile</p>
-                )}
-              </Button>
-              <Button
-                className="mt-4 text-white py-2 px-4 rounded-full cursor-pointer"
-                onClick={handleCreateJSONs}
-              >
-                {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
-              </Button>
-              <Button
-                className="mt-4 text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
-                onClick={handleCreateBoth}
-              >
-                {profiles.length > 1 ? (
-                  <p>Create Profiles & JSONs</p>
-                ) : (
-                  <p>Create Profile & JSON</p>
-                )}
-              </Button>
-            </div>
-          )}
         </div>
-      </div>
       </div>
     </div>
   );
