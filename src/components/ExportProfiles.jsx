@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Button } from "@nextui-org/react";
 const FileDownload = require('js-file-download');
 
 function ExportProfiles() {
@@ -20,9 +21,9 @@ function ExportProfiles() {
   return (
     <div>
       <h1>Export Profiles Component</h1>
-      <button className="bg-black text-white" onClick={handleAddProfile}>
+      <Button className="text-white" onClick={handleAddProfile}>
         Export Profiles
-      </button>
+      </Button>
     </div>
   );
 }

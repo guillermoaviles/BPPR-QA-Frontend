@@ -108,6 +108,7 @@ function HomePage() {
         Open Modal
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+
         <ModalContent>
           {(onClose) => (
             <>
