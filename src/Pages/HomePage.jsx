@@ -3,9 +3,32 @@ import axios from "axios";
 import { useEffect } from "react";
 import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Switch,
+  Checkbox,
+  Input,
+  Link,
+  Image,
+} from "@nextui-org/react";
+import { MailIcon } from "../assets/MailIcon";
+import { LockIcon } from "../assets/LockIcon";
+import avatar from "../assets/avatar.png";
 
 function HomePage() {
-  const [profile, setProfile] = useState("");
+  const [profiles, setProfiles] = useState([]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     const handleGetProfile = async () => {
@@ -14,9 +37,9 @@ function HomePage() {
           "http://localhost:8080/api/profiles/all"
         );
 
-        const profile = profileResponse.data;
+        const profiles = profileResponse.data;
 
-        setProfile(profile[0]);
+        setProfiles(profiles.slice(0, 6));
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
@@ -25,44 +48,65 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <div>
-        <p>{profile?.environment}</p>
-        <p>{profile?.intendedUse}</p>
-        <p>{profile?.inUse}</p>
-        <p>{profile?.profileUserId}</p>
-        <p>{profile?.username}</p>
-        <p>{profile?.pass}</p>
-        <p>{profile?.email}</p>
-        <p>{profile?.firstName}</p>
-        <p>{profile?.lastName}</p>
-        <p>{profile?.maidenName}</p>
-        <p>{profile?.birthdate}</p>
-        <p>{profile?.accountType}</p>
-        <p>{profile?.accountSubType}</p>
-        <p>{profile?.accountNumber}</p>
-        <p>{profile?.accountNickname}</p>
-        <p>{profile?.accountBalance}</p>
-        <p>{profile?.personalInformationEmail}</p>
-        <p>{profile?.personalInformationPhone}</p>
-        <p>{profile?.personalInformationAddress}</p>
-        <p>{profile?.personalInformationPassword}</p>
-        <p>{profile?.personalInformationQuestions}</p>
-        <p>{profile?.paymentMakePayments}</p>
-        <p>{profile?.cancelFutureTransfer}</p>
-        <p>{profile?.makeFuturePayment}</p>
-        <p>{profile?.deleteFuturePayment}</p>
-        <p>{profile?.editFuturePayment}</p>
-        <p>{profile?.onOffService}</p>
-        <p>{profile?.addPayee}</p>
-        <p>{profile?.nickname}</p>
-        <p>{profile?.payeeName}</p>
-        <p>{profile?.payeeAccountNumber}</p>
-        <p>{profile?.ebill}</p>
+    <div className="p-4">
+      <h1 className="text-xl font-bold underline mb-4">Hello world!</h1>
+      <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
+        {profiles?.map((profile) => {
+          return (
+            <Card key={profile.id} className="w-[325px] h-[235px]">
+              <CardHeader className="flex gap-3">
+                <Image
+                  alt="nextui logo"
+                  height={40}
+                  radius="sm"
+                  src={avatar}
+                  width={40}
+                />
+                <div className="flex flex-col">
+                  <p className="text-md">{profile.id}</p>
+                  {profile.isActive ? (
+                    <p className="text-small text-default-500">Active: 🟢</p>
+                  ) : (
+                    <p className="text-small text-default-500">Inactive: 🔴</p>
+                  )}
+                </div>
+              </CardHeader>
+              <Divider />
+              <CardBody>
+                <div className="flex space-x-4 text-small items-center">
+                  <div className="text-gray-700 font-bold">
+                    Profile User Id:
+                  </div>
+                  <div>{profile.profileUserId}</div>
+                </div>
+                <div className="flex space-x-4 text-small items-center">
+                  <div className="text-gray-700 font-bold">Username:</div>
+                  <div>{profile.username}</div>
+                </div>
+                <div className="flex space-x-4 text-small items-center">
+                  <div className="text-gray-700 font-bold">Account Type:</div>
+                  <div>{profile.accountType}</div>
+                </div>
+              </CardBody>
+              <Divider />
+              <CardFooter>
+                <Button color="primary">Edit</Button>
+                <Button
+                  color="warning"
+                  className="text-white left-3 bg-danger cursor-pointer"
+                >
+                  Delete
+                </Button>
+                <Switch className="ml-20" aria-label="inUse" />
+              </CardFooter>
+            </Card>
+          );
+        })}
       </div>
-      <AddProfiles/>
-      <ExportProfiles/>
+      <div className="flex flex-col">
+        <AddProfiles />
+        <ExportProfiles />
+      </div>
     </div>
   );
 }
