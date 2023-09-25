@@ -16,21 +16,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.card {
-  width: 325px;
-  height: 235px;
-}
-
-.card-container {
-  width: 1100px;
-  height: 50vh;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.bottom-button {
-  margin-top: 10px;
-}

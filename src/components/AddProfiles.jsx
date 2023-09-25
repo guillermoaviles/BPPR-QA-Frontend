@@ -159,7 +159,7 @@ function AddProfiles() {
   };
 
   return (
-    <div>
+    <div className="">
       <Button onPress={onOpen} color="primary">
         Add Profile
       </Button>
@@ -487,6 +487,7 @@ function AddProfiles() {
                 <Button
                   auto
                   color="success"
+                  className="text-white"
                   onClick={() => {
                     handleAddProfile();
                     onClose();
@@ -499,12 +500,12 @@ function AddProfiles() {
           )}
         </ModalContent>
       </Modal>
-      <div className="flex justify-center min-h-screen bg-gray-100">
-        <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
-          <div>
-            <div className="">
+      <div className="flex justify-center">
+        {profiles.length > 0 && (
+          <div className="w-[1100px] mx-auto rounded-lg shadow-lg mt-10">
+            <div className="m-auto flex flex-wrap justify-evenly p-4">
               {profiles?.map((profile, index) => (
-                <Card key={profile.id} className="card">
+                <Card key={profile.id} className="w-[325px] h-[235px]">
                   <CardHeader className="flex gap-3">
                     <Image
                       alt="nextui logo"
@@ -546,42 +547,36 @@ function AddProfiles() {
                 </Card>
               ))}
             </div>
-            {profiles.length > 0 && (
-              <div className="flex flex-col mt-4 p-4">
-                <Button
-                  className="text-white cursor-pointer"
-                  onClick={handleCreateProfiles}
-                >
-                  {profiles.length > 1 ? (
-                    <p>Create Profiles</p>
-                  ) : (
-                    <p>Create Profile</p>
-                  )}
-                </Button>
-                <Button
-                  className="text-white cursor-pointer top-1"
-                  onClick={handleCreateJSONs}
-                >
-                  {profiles.length > 1 ? (
-                    <p>Create JSONs</p>
-                  ) : (
-                    <p>Create JSON</p>
-                  )}
-                </Button>
-                <Button
-                  className="text-white cursor-pointer bottom-button"
-                  onClick={handleCreateBoth}
-                >
-                  {profiles.length > 1 ? (
-                    <p>Create Profiles & JSONs</p>
-                  ) : (
-                    <p>Create Profile & JSON</p>
-                  )}
-                </Button>
-              </div>
-            )}
+            <div className="flex flex-col w-[210px] mx-auto mt-4 p-4">
+              <Button
+                className="text-white cursor-pointer"
+                onClick={handleCreateProfiles}
+              >
+                {profiles.length > 1 ? (
+                  <p>Create Profiles</p>
+                ) : (
+                  <p>Create Profile</p>
+                )}
+              </Button>
+              <Button
+                className="text-white cursor-pointer mt-2"
+                onClick={handleCreateJSONs}
+              >
+                {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
+              </Button>
+              <Button
+                className="text-white cursor-pointer mt-2"
+                onClick={handleCreateBoth}
+              >
+                {profiles.length > 1 ? (
+                  <p>Create Profiles & JSONs</p>
+                ) : (
+                  <p>Create Profile & JSON</p>
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
