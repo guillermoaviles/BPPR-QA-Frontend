@@ -15,13 +15,12 @@ import {
   ModalFooter,
   Card,
   CardBody,
-  Accordion,
-  AccordionItem,
   CheckboxGroup,
   CardFooter,
   Chip,
   Divider,
   Tooltip,
+  Textarea,
 } from "@nextui-org/react";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import { LockIcon } from "../assets/LockIcon";
@@ -307,114 +306,117 @@ function Search() {
           </Modal>
         </div>
         <div className="col-span-3">
-        {searchDone && (
-          <Card className="sm">
-            <CardBody>
-              <div className="space-y-4">
-                {profiles.map((profile) => (
-                  <div key={profile?.id}>
-                    <Card isBlurred shadow="sm">
-                      <CardBody>
-                        <div className="grid grid-cols-4">
-                          <div className="col-span-2">
-                          <CheckboxGroup
-                            value={selectedProfiles}
-                            onChange={setSelectedProfiles}
-                          >
-                            <Checkbox value={profile?.id}>
-                              <Chip color="primary" variant="flat">
-                                ID: {profile?.id}
-                              </Chip>
-                            </Checkbox>
-                          </CheckboxGroup></div>
-                          <Chip
+          {searchDone && (
+            <Card className="sm">
+              <CardBody>
+                <div className="space-y-4">
+                  {profiles.map((profile) => (
+                    <div key={profile?.id}>
+                      <Card isBlurred shadow="sm">
+                        <CardBody>
+                          <div className="grid grid-cols-4">
+                            <div className="col-span-2">
+                              <CheckboxGroup
+                                value={selectedProfiles}
+                                onChange={setSelectedProfiles}
+                              >
+                                <Checkbox value={profile?.id}>
+                                  <Chip color="primary" variant="flat">
+                                    ID: {profile?.id}
+                                  </Chip>
+                                </Checkbox>
+                              </CheckboxGroup>
+                            </div>
+                            <Chip
                               color="warning"
                               variant="flat"
                               startContent={`@`}
                             >
                               Profile ID: {profile?.profileUserId}
                             </Chip>
-                          <div>
-                            {profile?.inUse ? (
-                              <Tooltip color="danger" placement="right" content={`Used By: ${profile?.user}`}>
-                              <Chip
-                                color="danger"
-                                variant="flat"
-                                startContent={<LockIcon />}
-                              >
-                                Locked
-                              </Chip></Tooltip>
-                            ) : (
-                              <Chip
-                                color="success"
-                                variant="flat"
-                                startContent={<UnlockIcon />}
-                              >
-                                Unlocked
-                              </Chip>
-                              
-                            )}
-                          </div>
-                        </div>
-                   
-                        <div className="grid grid-cols-4 mt-4">
-                          
-                          <div className="col-span-2">
-                            <b>Info:</b>
-                            <Divider />
-                            <p>
-                              <b>Username:</b> @{profile?.username}
-                            </p>
-                            <p>
-                              <b>Name:</b> {profile?.firstName}{" "}
-                              {profile?.lastName}
-                              {profile?.maidenName && (
-                                <> {profile?.maidenName}</>
+                            <div>
+                              {profile?.inUse ? (
+                                <Tooltip
+                                  color="danger"
+                                  placement="right"
+                                  content={`Used By: ${profile?.user}`}
+                                >
+                                  <Chip
+                                    color="danger"
+                                    variant="flat"
+                                    startContent={<LockIcon />}
+                                  >
+                                    Locked
+                                  </Chip>
+                                </Tooltip>
+                              ) : (
+                                <Chip
+                                  color="success"
+                                  variant="flat"
+                                  startContent={<UnlockIcon />}
+                                >
+                                  Unlocked
+                                </Chip>
                               )}
-                            </p>
-                            <p>
-                              <b>Email:</b> {profile?.email}
-                            </p>
+                            </div>
                           </div>
-                          <div>
-                            <b>Accounts:</b>
-                            <Divider />
-                            <p>
-                              <b>Type: </b> {profile?.accountType}
-                            </p>
-                            <p>
-                              <b>Sub-Type: </b> {profile?.accountSubType}
-                            </p>
-                            <p>
-                              <b>Number: </b> {profile?.accountNumber}
-                            </p>
-                          </div>
-                          <div>
-                            <div className="">
-                              <b>Use:</b>
+
+                          <div className="grid grid-cols-4 mt-4">
+                            <div className="col-span-2">
+                              <b>Profile Info:</b>
                               <Divider />
-                              <b>Environment: </b>
-                              {profile?.environment}
+                              <p>
+                                <b>Username:</b> @{profile?.username}
+                              </p>
+                              
+                              <p>
+                                <b>Name:</b> {profile?.firstName}{" "}
+                                {profile?.lastName}
+                                {profile?.maidenName && (
+                                  <> {profile?.maidenName}</>
+                                )}
+                              </p>
+                              <p>
+                                <b>Email:</b> {profile?.email}
+                              </p>
                             </div>
                             <div>
-                              <b>Intended Use: </b>
-                              {profile?.intendedUse}
+                              <b>Accounts:</b>
+                              <Divider />
+                              <p>
+                                <b>Type: </b> {profile?.accountType}
+                              </p>
+                              <p>
+                                <b>Sub-Type: </b> {profile?.accountSubType}
+                              </p>
+                              <p>
+                                <b>Number: </b> {profile?.accountNumber}
+                              </p>
                             </div>
-                            
+                            <div>
+                              <div className="">
+                                <b>Use:</b>
+                                <Divider />
+                                <b>Environment: </b>
+                                {profile?.environment}
+                              </div>
+                              <div>
+                                <b>Intended Use: </b>
+                                {profile?.intendedUse}
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </CardBody>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </CardBody>
-            <CardFooter>
-              Selected Profiles: {selectedProfiles.join(", ")}
-            </CardFooter>
-          </Card>
-        )}
-          
+                        </CardBody>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </CardBody>
+              <CardFooter className="p-8">
+                <p><b>Selected Profiles: </b> {selectedProfiles.join(", ")}</p>
+              </CardFooter>
+            </Card>
+          )}
         </div>
       </div>
     </div>
