@@ -16,6 +16,7 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Switch,
   Checkbox,
   Input,
   Link,
@@ -99,6 +100,7 @@ function HomePage() {
                   <Button color="warning" className="text-white left-3 bg-danger cursor-pointer">
                     Delete
                   </Button>
+                  <Switch className="ml-20" aria-label="inUse"/>
                 </CardFooter>
               </Card>
           );

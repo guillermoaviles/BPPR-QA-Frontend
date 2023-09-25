@@ -502,7 +502,7 @@ function AddProfiles() {
       <div className="flex justify-center min-h-screen bg-gray-100">
         <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
           <div>
-            <div>
+            <div className="">
               {profiles?.map((profile, index) => (
                 <Card key={profile.id} className="card">
                   <CardHeader className="flex gap-3">
