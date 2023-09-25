@@ -5,6 +5,7 @@ import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
 import {
   Card,
+  Chip,
   CardHeader,
   CardBody,
   CardFooter,
@@ -18,12 +19,14 @@ import {
   useDisclosure,
   Switch,
   Checkbox,
+  Tooltip,
   Input,
   Link,
   Image,
 } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon";
 import { LockIcon } from "../assets/LockIcon";
+import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
 
 function HomePage() {
@@ -62,13 +65,36 @@ function HomePage() {
                   src={avatar}
                   width={40}
                 />
-                <div className="flex flex-col">
-                  <p className="text-md">{profile.id}</p>
-                  {profile.isActive ? (
-                    <p className="text-small text-default-500">Active: 🟢</p>
+                <div className="flex">
+                  <Chip color="primary" variant="flat">
+                    ID: {profile?.id}
+                  </Chip>
+                  <div className="ml-24">
+                    {profile?.inUse ? (
+                    <Tooltip
+                      color="danger"
+                      placement="right"
+                      content={`Used By: ${profile?.user}`}
+                    >
+                      <Chip
+                        color="danger"
+                        variant="flat"
+                        startContent={<LockIcon />}
+                      >
+                        Locked
+                      </Chip>
+                    </Tooltip>
                   ) : (
-                    <p className="text-small text-default-500">Inactive: 🔴</p>
+                    <Chip
+                      color="success"
+                      variant="flat"
+                      startContent={<UnlockIcon />}
+                    >
+                      Unlocked
+                    </Chip>
                   )}
+                  </div>
+                  
                 </div>
               </CardHeader>
               <Divider />
