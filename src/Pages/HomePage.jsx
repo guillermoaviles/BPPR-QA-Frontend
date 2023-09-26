@@ -11,12 +11,8 @@ import {
   CardFooter,
   Divider,
   Button,
-  useDisclosure,
   Switch,
-  Checkbox,
   Tooltip,
-  Input,
-  Link,
   Image,
 } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon";
