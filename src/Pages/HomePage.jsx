@@ -10,11 +10,6 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
   Switch,
@@ -28,10 +23,11 @@ import { MailIcon } from "../assets/MailIcon";
 import { LockIcon } from "../assets/LockIcon";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
+import NavbarComp from "../components/NavbarComp";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
-  const [fetchProfiles, setFetchProfiles] = useState(true);
+
 
   useEffect(() => {
     const handleGetProfiles = async () => {
@@ -103,6 +99,7 @@ function HomePage() {
 
   return (
     <div className="p-4">
+    <NavbarComp />
       <h1 className="text-xl font-bold underline mb-4">Hello world!</h1>
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
         {profiles?.map((profile) => {
