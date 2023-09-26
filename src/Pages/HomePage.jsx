@@ -27,6 +27,7 @@ import NavbarComp from "../components/NavbarComp";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
+  const [fetchProfiles, setFetchProfiles] = useState(true);
 
 
   useEffect(() => {
