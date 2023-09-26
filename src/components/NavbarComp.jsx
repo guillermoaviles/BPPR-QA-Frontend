@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import {
   Navbar,
   NavbarBrand,
@@ -24,27 +26,31 @@ export default function NavbarComp() {
             </b>
           </Link>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-8">
-          <NavbarItem>
-            <Link to="#">Profile</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link to="/search">Search</Link>
-          </NavbarItem>
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button
-              className=""
-              as={Link}
-              color="primary"
-              href="/"
-              variant="flat"
-            >
-              Log Out
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
+        {isLoggedIn && (
+          <>
+            <NavbarContent className="hidden sm:flex gap-8">
+              <NavbarItem>
+                <Link to="#">Profile</Link>
+              </NavbarItem>
+              <NavbarItem>
+                <Link to="/search">Search</Link>
+              </NavbarItem>
+            </NavbarContent>
+            <NavbarContent justify="end">
+              <NavbarItem>
+                <Button
+                  className=""
+                  as={Link}
+                  color="primary"
+                  href="/"
+                  variant="flat"
+                >
+                  Log Out
+                </Button>
+              </NavbarItem>
+            </NavbarContent>
+          </>
+        )}
       </Navbar>
     </div>
   );
