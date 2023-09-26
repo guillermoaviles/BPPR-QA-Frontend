@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 function LoginPage() {
-  // State to store user input
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
   const [isSignUp, setIsSignUp] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
+  const { storeToken } = useContext(AuthContext);
 
-  // Handle form input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -19,7 +22,6 @@ function LoginPage() {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -31,18 +33,29 @@ function LoginPage() {
             username: "",
             password: "",
           });
+          setIsSignUp(!isSignUp);
           console.log("POST response", response);
-          if (response.status === 201) {
-            //   handleGetProfiles();
-          } else {
-            console.log("POST Failed");
-          }
+        })
+        .catch((error) => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
         });
 
       console.log("Signup Data:", formData);
     } else {
-      // Perform login logic here
-      // For simplicity, let's just log the input for now
+      axios
+        .post(
+          `http://localhost:8080/api/login?username=${formData.username}&password=${formData.password}`
+        )
+        .then((response) => {
+          console.log("JWT token", response.data.authToken);
+          storeToken(response.data.authToken);
+          navigate("/");
+        })
+        .catch((error) => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+        });
       console.log("Login Data:", formData);
     }
   };
@@ -127,6 +140,7 @@ function LoginPage() {
           </div>
         </form>
         <div className="text-center">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
           <p className="text-sm">
             {isSignUp ? "Already have an account?" : "Don't have an account?"}
             <button
