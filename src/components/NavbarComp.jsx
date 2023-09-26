@@ -16,6 +16,8 @@ import AddProfiles from "./AddProfiles";
 import ExportProfiles from "./ExportProfiles";
 
 export default function NavbarComp() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
   return (
     <div>
       <Navbar isBordered>
@@ -44,6 +46,7 @@ export default function NavbarComp() {
                   color="primary"
                   href="/"
                   variant="flat"
+                  onClick={logOutUser}
                 >
                   Log Out
                 </Button>

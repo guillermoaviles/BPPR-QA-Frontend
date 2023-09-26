@@ -12,7 +12,7 @@ function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
-  const { storeToken } = useContext(AuthContext);
+  const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,6 +50,7 @@ function LoginPage() {
         .then((response) => {
           console.log("JWT token", response.data.authToken);
           storeToken(response.data.authToken);
+          authenticateUser();
           navigate("/");
         })
         .catch((error) => {
