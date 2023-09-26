@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
 function LoginPage() {
   // State to store user input
@@ -6,6 +7,8 @@ function LoginPage() {
     username: "",
     password: "",
   });
+
+  const [isSignUp, setIsSignUp] = useState(false);
 
   // Handle form input changes
   const handleInputChange = (event) => {
@@ -19,9 +22,29 @@ function LoginPage() {
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // You can perform validation and authentication here
-    // For simplicity, let's just log the input for now
-    console.log('Submitted Data:', formData);
+
+    if (isSignUp) {
+      axios
+        .post("http://localhost:8080/api/users", formData)
+        .then((response) => {
+          setFormData({
+            username: "",
+            password: "",
+          });
+          console.log("POST response", response);
+          if (response.status === 201) {
+            //   handleGetProfiles();
+          } else {
+            console.log("POST Failed");
+          }
+        });
+
+      console.log("Signup Data:", formData);
+    } else {
+      // Perform login logic here
+      // For simplicity, let's just log the input for now
+      console.log("Login Data:", formData);
+    }
   };
 
   return (
@@ -29,7 +52,7 @@ function LoginPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Login
+            {isSignUp ? "Sign Up" : "Login"}
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -99,10 +122,21 @@ function LoginPage() {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Login
+              {isSignUp ? "Sign Up" : "Login"}
             </button>
           </div>
         </form>
+        <div className="text-center">
+          <p className="text-sm">
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}
+            <button
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="ml-1 font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              {isSignUp ? "Login" : "Sign Up"}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
