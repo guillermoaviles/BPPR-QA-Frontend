@@ -48,8 +48,8 @@ function LoginPage(props) {
           `http://localhost:8080/api/login?username=${formData.username}&password=${formData.password}`
         )
         .then((response) => {
-          console.log("JWT token", response.data.authToken);
-          storeToken(response.data.authToken);
+          console.log("JWT token", response.data.access_token);
+          storeToken(response.data.access_token);
           authenticateUser();
           navigate("/");
         })
