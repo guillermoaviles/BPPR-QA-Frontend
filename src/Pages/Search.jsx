@@ -360,7 +360,6 @@ function Search() {
                               )}
                             </div>
                           </div>
-
                           <div className="grid grid-cols-4 mt-4">
                             <div className="col-span-2">
                               <b>Profile Info:</b>

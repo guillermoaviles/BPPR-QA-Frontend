@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
 import {
@@ -24,7 +26,9 @@ import NavbarComp from "../components/NavbarComp";
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
   const [fetchProfiles, setFetchProfiles] = useState(true);
+  const { user } = useContext(AuthContext);
 
+  console.log('user.username', user.username);
 
   useEffect(() => {
     const handleGetProfiles = async () => {
@@ -82,7 +86,7 @@ function HomePage() {
         payeeName: profile.payeeName,
         payeeAccountNumber: profile.payeeAccountNumber,
         ebill: profile.ebill,
-        user: profile.user,
+        user: user.username,
       })
       .then((response) => {
         console.log("PATCH response", response);
@@ -97,7 +101,6 @@ function HomePage() {
   return (
     <div className="p-4">
     <NavbarComp />
-      <h1 className="text-xl font-bold underline mb-4">Hello world!</h1>
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
         {profiles?.map((profile) => {
           return (
@@ -119,7 +122,7 @@ function HomePage() {
                       <Tooltip
                         color="danger"
                         placement="right"
-                        content={`Used By: ${profile?.user}`}
+                        content={`Used By: ${profile.user}`}
                       >
                         <Chip
                           color="danger"
