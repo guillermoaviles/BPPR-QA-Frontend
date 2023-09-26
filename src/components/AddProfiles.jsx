@@ -508,7 +508,7 @@ function AddProfiles() {
             </div>
             <div className="m-auto flex flex-wrap justify-evenly p-4">
               {profiles?.map((profile, index) => (
-                <Card key={profile.id} className="w-[325px] h-[235px] mb-4">
+                <Card key={index} className="w-[325px] h-[235px] mb-4">
                   <CardHeader className="flex gap-3">
                     <Image
                       alt="nextui logo"

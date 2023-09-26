@@ -5,6 +5,7 @@ import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
 import {
   Card,
+  Chip,
   CardHeader,
   CardBody,
   CardFooter,
@@ -13,18 +14,23 @@ import {
   useDisclosure,
   Switch,
   Checkbox,
+  Tooltip,
   Input,
   Link,
   Image,
 } from "@nextui-org/react";
+import { MailIcon } from "../assets/MailIcon";
+import { LockIcon } from "../assets/LockIcon";
+import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
 import NavbarComp from "../components/NavbarComp";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
 
+
   useEffect(() => {
-    const handleGetProfile = async () => {
+    const handleGetProfiles = async () => {
       try {
         const profileResponse = await axios.get(
           "http://localhost:8080/api/profiles/all"
@@ -33,12 +39,63 @@ function HomePage() {
         const profiles = profileResponse.data;
 
         setProfiles(profiles.slice(0, 6));
+        setFetchProfiles(false); // Set fetchProfiles to false after fetching data
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
     };
-    handleGetProfile();
-  }, []);
+
+    if (fetchProfiles) {
+      handleGetProfiles();
+    }
+  }, [fetchProfiles]); // Only fetch data when fetchProfiles changes
+
+  const handleSetIsInUse = (profile) => {
+    axios
+      .patch(`http://localhost:8080/api/profiles/${profile.id}/inUse`, {
+        environment: profile.environment,
+        intendedUse: profile.intendedUse,
+        inUse: !profile.inUse,
+        profileUserId: profile.profileUserId,
+        username: profile.username,
+        email: profile.email,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        maidenName: profile.maidenName,
+        birthdate: profile.birthdate,
+        accountType: profile.accountType,
+        accountSubType: profile.accountSubType,
+        accountNumber: profile.accountNumber,
+        accountNickname: profile.accountNickname,
+        accountBalance: profile.accountBalance,
+        personalInformationEmail: profile.personalInformationEmail,
+        personalInformationPhone: profile.personalInformationPhone,
+        personalInformationAddress: profile.personalInformationAddress,
+        personalInformationPassword: profile.personalInformationPassword,
+        personalInformationQuestions: profile.personalInformationQuestions,
+        paymentMakePayments: profile.paymentMakePayments,
+        cancelFutureTransfer: profile.cancelFutureTransfer,
+        makeFuturePayment: profile.makeFuturePayment,
+        makeFutureTransfer: profile.makeFutureTransfer,
+        deleteFuturePayment: profile.deleteFuturePayment,
+        editFuturePayment: profile.editFuturePayment,
+        onOffService: profile.onOffService,
+        addPayee: profile.addPayee,
+        nickname: profile.nickname,
+        payeeName: profile.payeeName,
+        payeeAccountNumber: profile.payeeAccountNumber,
+        ebill: profile.ebill,
+        user: profile.user,
+      })
+      .then((response) => {
+        console.log("PATCH response", response);
+        if (response.status === 200) {
+          setFetchProfiles(true);
+        } else {
+          console.log("PATCH Failed");
+        }
+      });
+  };
 
   return (
     <div className="p-4">
@@ -56,13 +113,35 @@ function HomePage() {
                   src={avatar}
                   width={40}
                 />
-                <div className="flex flex-col">
-                  <p className="text-md">{profile.id}</p>
-                  {profile.isActive ? (
-                    <p className="text-small text-default-500">Active: 🟢</p>
-                  ) : (
-                    <p className="text-small text-default-500">Inactive: 🔴</p>
-                  )}
+                <div className="flex">
+                  <Chip color="primary" variant="flat">
+                    ID: {profile?.id}
+                  </Chip>
+                  <div className="ml-24">
+                    {profile?.inUse ? (
+                      <Tooltip
+                        color="danger"
+                        placement="right"
+                        content={`Used By: ${profile?.user}`}
+                      >
+                        <Chip
+                          color="danger"
+                          variant="flat"
+                          startContent={<LockIcon />}
+                        >
+                          Locked
+                        </Chip>
+                      </Tooltip>
+                    ) : (
+                      <Chip
+                        color="success"
+                        variant="flat"
+                        startContent={<UnlockIcon />}
+                      >
+                        Unlocked
+                      </Chip>
+                    )}
+                  </div>
                 </div>
               </CardHeader>
               <Divider />
@@ -91,7 +170,11 @@ function HomePage() {
                 >
                   Delete
                 </Button>
-                <Switch className="ml-20" aria-label="inUse" />
+                <Switch
+                  onValueChange={() => handleSetIsInUse(profile)} // Wrap the function call in a lambda
+                  className="ml-20"
+                  aria-label="inUse"
+                />
               </CardFooter>
             </Card>
           );
