@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-function LoginPage() {
+function LoginPage(props) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
