@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
   Modal,
   ModalContent,
   ModalHeader,
@@ -10,7 +15,10 @@ import {
   useDisclosure,
   Checkbox,
   Input,
+  Link,
+  Image,
 } from "@nextui-org/react";
+import avatar from "../assets/avatar.png";
 
 function AddProfiles() {
   const [profiles, setProfiles] = useState([]);
@@ -151,7 +159,7 @@ function AddProfiles() {
   };
 
   return (
-    <div>
+    <div className="">
       <Button onPress={onOpen} color="primary">
         Add Profile
       </Button>
@@ -479,6 +487,7 @@ function AddProfiles() {
                 <Button
                   auto
                   color="success"
+                  className="text-white"
                   onClick={() => {
                     handleAddProfile();
                     onClose();
@@ -491,29 +500,59 @@ function AddProfiles() {
           )}
         </ModalContent>
       </Modal>
-      <div className="flex justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md mx-auto rounded-lg shadow-lg bg-white p-6 mt-10">
-        <div>
-          <div>
-            {profiles?.map((profile, index) => (
-              <div key={index} className="mb-4" >
-                <div>
-                  <h3>Profile ID: {profile.profileUserId}</h3>
-                  <h3>Account Type: {profile.accountType}</h3>
-                </div>
-                <Button
-                  className="text-white bg-danger cursor-pointer"
-                  onClick={() => handleDeleteProfile(index)}
-                >
-                  Delete
-                </Button>
-              </div>
-            ))}
-          </div>
-          {profiles.length > 0 && (
-            <div className="flex flex-col mt-4">
+      <div className="flex justify-center">
+        {profiles.length > 0 && (
+          <div className="w-[1100px] mx-auto rounded-lg shadow-lg mt-10">
+            <div className="font-bold text-xl p-10">
+              Profiles to Add: ({profiles.length})
+            </div>
+            <div className="m-auto flex flex-wrap justify-evenly p-4">
+              {profiles?.map((profile, index) => (
+                <Card key={profile.id} className="w-[325px] h-[235px] mb-4">
+                  <CardHeader className="flex gap-3">
+                    <Image
+                      alt="nextui logo"
+                      height={40}
+                      radius="sm"
+                      src={avatar}
+                      width={40}
+                    />
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">
+                        Profile User Id:
+                      </div>
+                      <div>{" " + profile.profileUserId}</div>
+                    </div>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">Username:</div>
+                      <div>{profile.username}</div>
+                    </div>
+                    <div className="flex space-x-4 text-small items-center">
+                      <div className="text-gray-700 font-bold">
+                        Account Type:
+                      </div>
+                      <div>{profile.accountType}</div>
+                    </div>
+                  </CardBody>
+                  <Divider />
+                  <CardFooter>
+                    <Button color="primary">Edit</Button>
+                    <Button
+                      className="text-white bg-danger cursor-pointer left-3"
+                      onClick={() => handleDeleteProfile(index)}
+                    >
+                      Delete
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+            <div className="flex flex-col w-[210px] mx-auto mt-4 p-4">
               <Button
-                className="text-white py-2 px-4 rounded-full cursor-pointer"
+                className="text-white cursor-pointer"
                 onClick={handleCreateProfiles}
               >
                 {profiles.length > 1 ? (
@@ -523,13 +562,13 @@ function AddProfiles() {
                 )}
               </Button>
               <Button
-                className="mt-4 text-white py-2 px-4 rounded-full cursor-pointer"
+                className="text-white cursor-pointer mt-2"
                 onClick={handleCreateJSONs}
               >
                 {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
               </Button>
               <Button
-                className="mt-4 text-white py-2 px-4 rounded-full hover:bg-gray-800 cursor-pointer"
+                className="text-white cursor-pointer mt-2"
                 onClick={handleCreateBoth}
               >
                 {profiles.length > 1 ? (
@@ -539,9 +578,8 @@ function AddProfiles() {
                 )}
               </Button>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
       </div>
     </div>
   );
