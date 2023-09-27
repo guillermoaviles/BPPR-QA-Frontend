@@ -502,7 +502,7 @@ function AddProfiles({ setFetchProfiles }) {
           )}
         </ModalContent>
       </Modal>
-      <div className="mt-8 w-full">
+      <div className="mt-4 w-full">
         {profiles.length > 0 && (
           <Card className="">
             <div className="font-bold text-xl m-4">
@@ -536,9 +536,9 @@ function AddProfiles({ setFetchProfiles }) {
                 )}
               </Button>
             </div>
-            <div className="border-2 border-blue-400 ">
+            <div>
               {profiles?.map((profile, index) => (
-                <div className="border-2 border-yellow-500 m-8">
+                <div className="m-4">
                   <Card key={index} className="">
                     <CardHeader className="">
                       <Image
@@ -553,7 +553,7 @@ function AddProfiles({ setFetchProfiles }) {
                     <CardBody>
                       <div className="flex space-x-4 text-small items-center">
                         <div className="text-gray-700 font-bold">
-                          Profile User Id:
+                          User Id:
                         </div>
                         <div>{" " + profile.profileUserId}</div>
                       </div>

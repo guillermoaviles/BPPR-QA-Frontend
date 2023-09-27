@@ -104,11 +104,11 @@ function HomePage() {
 
   return (
     <div className="grid grid-cols-4 p-4">
-      <div className="flex m-8">
+      <div className="flex m-4">
         <AddProfiles setFetchProfiles={setFetchProfiles} />
       </div>
       <div className="col-span-3">
-        <div className="m-4 grid grid-cols-3 content-start gap-4 flex flex-wrap">
+        <div className="m-2 grid grid-cols-3 content-start gap-2 flex flex-wrap">
           {profiles?.map((profile) => {
             return (
               <Card
