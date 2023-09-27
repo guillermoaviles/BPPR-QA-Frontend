@@ -28,7 +28,7 @@ function HomePage() {
   const [fetchProfiles, setFetchProfiles] = useState(true);
   const { user } = useContext(AuthContext);
 
-  console.log('user.username', user.username);
+  console.log("user.username", user.username);
 
   useEffect(() => {
     const handleGetProfiles = async () => {
@@ -51,7 +51,7 @@ function HomePage() {
     }
   }, [fetchProfiles]); // Only fetch data when fetchProfiles changes
 
-  const handleSetIsInUse = (profile) => {
+  const handleSetIsInUse = (profile, user) => {
     axios
       .patch(`http://localhost:8080/api/profiles/${profile.id}/inUse`, {
         environment: profile.environment,
@@ -100,7 +100,7 @@ function HomePage() {
 
   return (
     <div className="p-4">
-    <NavbarComp />
+      <NavbarComp />
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
         {profiles?.map((profile) => {
           return (
@@ -171,9 +171,11 @@ function HomePage() {
                   Delete
                 </Button>
                 <Switch
-                  onValueChange={() => handleSetIsInUse(profile)} // Wrap the function call in a lambda
+                  isSelected={profile.inUse}
+                  onValueChange={() => handleSetIsInUse(profile, user)}
                   className="ml-20"
                   aria-label="inUse"
+                  color="danger"
                 />
               </CardFooter>
             </Card>
