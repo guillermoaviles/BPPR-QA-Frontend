@@ -117,7 +117,6 @@ function HomePage() {
 
   return (
     <div className="p-4">
-      <NavbarComp />
       <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
         {profiles?.map((profile) => {
           return (
