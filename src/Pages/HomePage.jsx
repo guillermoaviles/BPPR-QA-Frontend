@@ -99,7 +99,6 @@ function HomePage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold underline mb-4">Hello world!</h1>
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
         {profiles?.map((profile) => {
           return (
@@ -162,10 +161,11 @@ function HomePage() {
               </CardBody>
               <Divider />
               <CardFooter>
-                <Button color="primary">Edit</Button>
+                <Button color="primary" variant="ghost">Edit</Button>
                 <Button
-                  color="warning"
-                  className="text-white left-3 bg-danger cursor-pointer"
+                  color="danger"
+                  className=" left-3 cursor-pointer"
+                  variant="ghost"
                 >
                   Delete
                 </Button>
