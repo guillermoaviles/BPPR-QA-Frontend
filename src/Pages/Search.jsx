@@ -20,7 +20,6 @@ import {
   Chip,
   Divider,
   Tooltip,
-  Textarea,
 } from "@nextui-org/react";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import { LockIcon } from "../assets/LockIcon";
@@ -108,7 +107,6 @@ function Search() {
 
   return (
     <div className="m-8">
-      <h1 className="mb-4">Search Component</h1>
       <div className="grid grid-cols-4 gap-4">
         <div>
           <Card className="sm">
@@ -127,7 +125,7 @@ function Search() {
             <ModalContent>
               {(onClose) => (
                 <>
-                  <ModalHeader>Modal Header</ModalHeader>
+                  <ModalHeader>Filter Profiles</ModalHeader>
                   <ModalBody>
                     <div className="flex flex-col items-center space-y-2 my-8">
                       <Checkbox
