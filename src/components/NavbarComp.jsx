@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import {
   Navbar,
   NavbarBrand,
@@ -15,6 +17,7 @@ import ExportProfiles from "./ExportProfiles";
 import internaltools from "../assets/internaltools.svg";
 
 export default function NavbarComp() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const location = useLocation();
   const isActive = (path) => {
     return location.pathname === path;
@@ -32,27 +35,32 @@ export default function NavbarComp() {
              />
           </Link>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-8 ml-24">
-          <NavbarItem isActive={isActive("/")}>
+        {isLoggedIn && (
+          <>
+            <NavbarContent className="hidden sm:flex gap-8">
+              <NavbarItem isActive={isActive("/")}>
             <Link to="/">Home</Link>
           </NavbarItem>
           <NavbarItem isActive={isActive("/search")}>
             <Link to="/search">Search</Link>
           </NavbarItem>
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button
-              className=""
-              as={Link}
-              color="primary"
-              href="/"
-              variant="ghost"
-            >
-              Log Out
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
+            </NavbarContent>
+            <NavbarContent justify="end">
+              <NavbarItem>
+                <Button
+                  className=""
+                  as={Link}
+                  color="primary"
+                  href="/"
+                  variant="flat"
+                  onClick={logOutUser}
+                >
+                  Log Out
+                </Button>
+              </NavbarItem>
+            </NavbarContent>
+          </>
+        )}
       </Navbar>
     </div>
   );

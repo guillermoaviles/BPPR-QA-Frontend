@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import { Navigate, useNavigate } from "react-router-dom";
 import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
@@ -24,12 +26,14 @@ import EditProfile from "../components/EditProfile";
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
   const [fetchProfiles, setFetchProfiles] = useState(true);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handlePress = (id) => {
     console.log("pressed")
     navigate(`/profile/${id}`)
   }
+  
   useEffect(() => {
     const handleGetProfiles = async () => {
       try {
@@ -51,7 +55,7 @@ function HomePage() {
     }
   }, [fetchProfiles]); // Only fetch data when fetchProfiles changes
 
-  const handleSetIsInUse = (profile) => {
+  const handleSetIsInUse = (profile, user) => {
     axios
       .patch(`http://localhost:8080/api/profiles/${profile.id}/inUse`, {
         environment: profile.environment,
@@ -86,7 +90,7 @@ function HomePage() {
         payeeName: profile.payeeName,
         payeeAccountNumber: profile.payeeAccountNumber,
         ebill: profile.ebill,
-        user: profile.user,
+        user: user.username,
       })
       .then((response) => {
         console.log("PATCH response", response);
@@ -113,6 +117,7 @@ function HomePage() {
 
   return (
     <div className="p-4">
+      <NavbarComp />
       <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
         {profiles?.map((profile) => {
           return (
@@ -134,7 +139,7 @@ function HomePage() {
                       <Tooltip
                         color="danger"
                         placement="right"
-                        content={`Used By: ${profile?.user}`}
+                        content={`Used By: ${profile.user}`}
                       >
                         <Chip
                           color="danger"
@@ -185,9 +190,11 @@ function HomePage() {
                   Delete
                 </Button>
                 <Switch
-                  onValueChange={() => handleSetIsInUse(profile)}
+                  isSelected={profile.inUse}
+                  onValueChange={() => handleSetIsInUse(profile, user)}
                   className="ml-20"
                   aria-label="inUse"
+                  color="danger"
                 />
               </CardFooter>
             </Card>

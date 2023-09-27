@@ -2,8 +2,12 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Search from "./pages/Search";
-import NavbarComp from "./components/NavbarComp";
+import LoginPage from "./pages/LoginPage";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
 import Profile from "./pages/Profile";
+
+import NavbarComp from "./components/NavbarComp";
 
 function App() {
   return (
@@ -11,9 +15,10 @@ function App() {
     <div className="text-center">
       <NavbarComp />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>}/>
+        <Route path="/" element={<IsPrivate><HomePage /></IsPrivate>} />
+        <Route path="/search" element={<IsPrivate><Search /></IsPrivate>} />
+        <Route path="/profile/:id" element={<IsPrivate><Profile /></IsPrivate>} />
       </Routes>
 
     </div>
