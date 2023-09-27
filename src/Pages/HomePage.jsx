@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { Navigate, useNavigate } from "react-router-dom";
 import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
 import {
@@ -17,19 +18,22 @@ import {
   Tooltip,
   Image,
 } from "@nextui-org/react";
-import { MailIcon } from "../assets/MailIcon";
 import { LockIcon } from "../assets/LockIcon";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
-import NavbarComp from "../components/NavbarComp";
+import EditProfile from "../components/EditProfile";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
   const [fetchProfiles, setFetchProfiles] = useState(true);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  console.log("user.username", user.username);
-
+  const handlePress = (id) => {
+    console.log("pressed")
+    navigate(`/profile/${id}`)
+  }
+  
   useEffect(() => {
     const handleGetProfiles = async () => {
       try {
@@ -98,13 +102,26 @@ function HomePage() {
       });
   };
 
+  const handleDelete = (profile) => {
+    axios
+      .delete(`http://localhost:8080/api/profiles/${profile.id}/delete`)
+      .then(((response) => {
+        console.log("DELETE response", response);
+        if (response.status === 204) {
+          setFetchProfiles(true);
+        } else {
+          console.log("DELETE Failed");
+        }
+      }))
+  }
+
   return (
     <div className="p-4">
       <NavbarComp />
-      <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
+      <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
         {profiles?.map((profile) => {
           return (
-            <Card key={profile.id} className="w-[325px] h-[235px]">
+            <Card isPressable onPress={() => handlePress(profile.id)} key={profile.id} className="w-[325px] h-[235px]">
               <CardHeader className="flex gap-3">
                 <Image
                   alt="nextui logo"
@@ -163,10 +180,12 @@ function HomePage() {
               </CardBody>
               <Divider />
               <CardFooter>
-                <Button color="primary">Edit</Button>
+                <EditProfile selectedProfile={profile} />
                 <Button
-                  color="warning"
-                  className="text-white left-3 bg-danger cursor-pointer"
+                  color="danger"
+                  className=" left-3 cursor-pointer"
+                  variant="ghost"
+                  onPress={() => handleDelete(profile)}
                 >
                   Delete
                 </Button>
@@ -183,8 +202,7 @@ function HomePage() {
         })}
       </div>
       <div className="flex flex-col">
-        <AddProfiles />
-        <ExportProfiles />
+        <AddProfiles setFetchProfiles={setFetchProfiles} />
       </div>
     </div>
   );

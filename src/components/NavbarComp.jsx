@@ -11,32 +11,39 @@ import {
   DropdownItem,
   DropdownMenu,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AddProfiles from "./AddProfiles";
 import ExportProfiles from "./ExportProfiles";
+import internaltools from "../assets/internaltools.svg";
 
 export default function NavbarComp() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+  const location = useLocation();
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
   return (
     <div>
       <Navbar isBordered>
         <NavbarBrand>
           <Link to="/">
-            <b>
-              <p>BPPR</p>
-            </b>
+            <img
+            src={internaltools}
+            alt="BPPR Internal Tools"
+            width="200"
+            height="200"
+             />
           </Link>
         </NavbarBrand>
         {isLoggedIn && (
           <>
             <NavbarContent className="hidden sm:flex gap-8">
-              <NavbarItem>
-                <Link to="#">Profile</Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Link to="/search">Search</Link>
-              </NavbarItem>
+              <NavbarItem isActive={isActive("/")}>
+            <Link to="/">Home</Link>
+          </NavbarItem>
+          <NavbarItem isActive={isActive("/search")}>
+            <Link to="/search">Search</Link>
+          </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
               <NavbarItem>

@@ -20,7 +20,7 @@ import {
   Chip,
   Divider,
   Tooltip,
-  Textarea,
+  Switch,
 } from "@nextui-org/react";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import { LockIcon } from "../assets/LockIcon";
@@ -106,9 +106,68 @@ function Search() {
 
   const [selectedProfiles, setSelectedProfiles] = useState([]);
 
+  const handleSetIsInUse = (profile) => {
+    axios
+      .patch(`http://localhost:8080/api/profiles/${profile.id}/inUse`, {
+        environment: profile.environment,
+        intendedUse: profile.intendedUse,
+        inUse: !profile.inUse,
+        profileUserId: profile.profileUserId,
+        username: profile.username,
+        email: profile.email,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        maidenName: profile.maidenName,
+        birthdate: profile.birthdate,
+        accountType: profile.accountType,
+        accountSubType: profile.accountSubType,
+        accountNumber: profile.accountNumber,
+        accountNickname: profile.accountNickname,
+        accountBalance: profile.accountBalance,
+        personalInformationEmail: profile.personalInformationEmail,
+        personalInformationPhone: profile.personalInformationPhone,
+        personalInformationAddress: profile.personalInformationAddress,
+        personalInformationPassword: profile.personalInformationPassword,
+        personalInformationQuestions: profile.personalInformationQuestions,
+        paymentMakePayments: profile.paymentMakePayments,
+        cancelFutureTransfer: profile.cancelFutureTransfer,
+        makeFuturePayment: profile.makeFuturePayment,
+        makeFutureTransfer: profile.makeFutureTransfer,
+        deleteFuturePayment: profile.deleteFuturePayment,
+        editFuturePayment: profile.editFuturePayment,
+        onOffService: profile.onOffService,
+        addPayee: profile.addPayee,
+        nickname: profile.nickname,
+        payeeName: profile.payeeName,
+        payeeAccountNumber: profile.payeeAccountNumber,
+        ebill: profile.ebill,
+        user: profile.user,
+      })
+      .then((response) => {
+        console.log("PATCH response", response);
+        if (response.status === 200) {
+          // setFetchProfiles(true);
+        } else {
+          console.log("PATCH Failed");
+        }
+      });
+  };
+
+  const handleDelete = (profile) => {
+    axios
+      .delete(`http://localhost:8080/api/profiles/${profile.id}/delete`)
+      .then((response) => {
+        console.log("DELETE response", response);
+        if (response.status === 204) {
+          // setFetchProfiles(true);
+        } else {
+          console.log("DELETE Failed");
+        }
+      });
+  };
+
   return (
     <div className="m-8">
-      <h1 className="mb-4">Search Component</h1>
       <div className="grid grid-cols-4 gap-4">
         <div>
           <Card className="sm">
@@ -127,7 +186,7 @@ function Search() {
             <ModalContent>
               {(onClose) => (
                 <>
-                  <ModalHeader>Modal Header</ModalHeader>
+                  <ModalHeader>Filter Profiles</ModalHeader>
                   <ModalBody>
                     <div className="flex flex-col items-center space-y-2 my-8">
                       <Checkbox
@@ -367,7 +426,7 @@ function Search() {
                               <p>
                                 <b>Username:</b> @{profile?.username}
                               </p>
-                              
+
                               <p>
                                 <b>Name:</b> {profile?.firstName}{" "}
                                 {profile?.lastName}
@@ -405,6 +464,25 @@ function Search() {
                               </div>
                             </div>
                           </div>
+                          <CardFooter>
+                            <Button className="-ml-3" color="primary" variant="ghost">
+                              Edit
+                            </Button>
+                            <Button
+                              color="danger"
+                              className=" left-3 cursor-pointer"
+                              variant="ghost"
+                              onPress={() => handleDelete(profile)}
+                            >
+                              Delete
+                            </Button>
+                            <Switch
+                              onValueChange={() => handleSetIsInUse(profile)}
+                              className="ml-7"
+                              aria-label="inUse"
+                              size="lg"
+                            />
+                          </CardFooter>
                         </CardBody>
                       </Card>
                     </div>
@@ -412,7 +490,9 @@ function Search() {
                 </div>
               </CardBody>
               <CardFooter className="p-8">
-                <p><b>Selected Profiles: </b> {selectedProfiles.join(", ")}</p>
+                <p>
+                  <b>Selected Profiles: </b> {selectedProfiles.join(", ")}
+                </p>
               </CardFooter>
             </Card>
           )}
