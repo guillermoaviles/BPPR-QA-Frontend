@@ -30,10 +30,10 @@ function HomePage() {
   const navigate = useNavigate();
 
   const handlePress = (id) => {
-    console.log("pressed")
-    navigate(`/profile/${id}`)
-  }
-  
+    console.log("pressed");
+    navigate(`/profile/${id}`);
+  };
+
   useEffect(() => {
     const handleGetProfiles = async () => {
       try {
@@ -103,85 +103,100 @@ function HomePage() {
   };
 
   return (
-    <div className="p-4">
-      <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
-        {profiles?.map((profile) => {
-          return (
-            <Card isPressable onPress={() => handlePress(profile.id)} key={profile.id} className="w-[325px] h-[235px]">
-              <CardHeader className="flex gap-3">
-                <Image
-                  alt="nextui logo"
-                  height={40}
-                  radius="sm"
-                  src={avatar}
-                  width={40}
-                />
-                <div className="flex">
-                  <Chip color="primary" variant="flat">
-                    ID: {profile?.id}
-                  </Chip>
-                  <div className="ml-24">
-                    {profile?.inUse ? (
-                      <Tooltip
-                        color="danger"
-                        placement="right"
-                        content={`Used By: ${profile.user}`}
-                      >
-                        <Chip
-                          color="danger"
-                          variant="flat"
-                          startContent={<LockIcon />}
-                        >
-                          Locked
-                        </Chip>
-                      </Tooltip>
-                    ) : (
-                      <Chip
-                        color="success"
-                        variant="flat"
-                        startContent={<UnlockIcon />}
-                      >
-                        Unlocked
-                      </Chip>
-                    )}
-                  </div>
-                </div>
-              </CardHeader>
-              <Divider />
-              <CardBody>
-                <div className="flex space-x-4 text-small items-center">
-                  <div className="text-gray-700 font-bold">
-                    Profile User Id:
-                  </div>
-                  <div>{profile.profileUserId}</div>
-                </div>
-                <div className="flex space-x-4 text-small items-center">
-                  <div className="text-gray-700 font-bold">Username:</div>
-                  <div>{profile.username}</div>
-                </div>
-                <div className="flex space-x-4 text-small items-center">
-                  <div className="text-gray-700 font-bold">Account Type:</div>
-                  <div>{profile.accountType}</div>
-                </div>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <EditProfile selectedProfile={profile} />
-                <DeleteProfile selectedProfile={profile} setFetchProfiles={setFetchProfiles} />
-                <Switch
-                  isSelected={profile.inUse}
-                  onValueChange={() => handleSetIsInUse(profile, user)}
-                  className="ml-20"
-                  aria-label="inUse"
-                  color="danger"
-                />
-              </CardFooter>
-            </Card>
-          );
-        })}
-      </div>
-      <div className="flex flex-col">
+    <div className="grid grid-cols-4 p-4">
+      <div className="flex m-8">
         <AddProfiles setFetchProfiles={setFetchProfiles} />
+      </div>
+      <div className="col-span-3">
+        <div className="m-4 grid grid-cols-3 content-start gap-4 flex flex-wrap">
+          {profiles?.map((profile) => {
+            return (
+              <Card
+                isPressable
+                onPress={() => handlePress(profile.id)}
+                key={profile.id}
+                className=""
+              >
+                <CardHeader className="flex justify-between">
+                  <div className="flex">
+                    <Image
+                      alt="nextui logo"
+                      height={40}
+                      radius="sm"
+                      src={avatar}
+                      width={40}
+                    />
+                    
+                      <Chip className="mt-2" color="primary" variant="flat">
+                        ID: {profile?.id}
+                      </Chip>
+                    </div>
+                    <div className="flex justify-end">
+                      {profile?.inUse ? (
+                        <Tooltip
+                          color="danger"
+                          placement="right"
+                          content={`Used By: ${profile.user}`}
+                        >
+                          <Chip
+                            color="danger"
+                            variant="flat"
+                            startContent={<LockIcon />}
+                          >
+                            Locked
+                          </Chip>
+                        </Tooltip>
+                      ) : (
+                        <Chip
+                          color="success"
+                          variant="flat"
+                          startContent={<UnlockIcon />}
+                        >
+                          Unlocked
+                        </Chip>
+                      )}
+                    </div>
+                  
+                </CardHeader>
+                <Divider />
+                <CardBody>
+                  <div className="flex space-x-4 text-small items-center">
+                    <div className="text-gray-700 font-bold">
+                      Profile User Id:
+                    </div>
+                    <div>{profile.profileUserId}</div>
+                  </div>
+                  <div className="flex space-x-4 text-small items-center">
+                    <div className="text-gray-700 font-bold">Username:</div>
+                    <div>{profile.username}</div>
+                  </div>
+                  <div className="flex space-x-4 text-small items-center">
+                    <div className="text-gray-700 font-bold">Account Type:</div>
+                    <div>{profile.accountType}</div>
+                  </div>
+                </CardBody>
+                <Divider />
+                <CardFooter className="flex justify-between">
+                  <div className="flex">
+                    <EditProfile selectedProfile={profile} />
+                    <DeleteProfile
+                      selectedProfile={profile}
+                      setFetchProfiles={setFetchProfiles}
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <Switch
+                      isSelected={profile.inUse}
+                      onValueChange={() => handleSetIsInUse(profile, user)}
+                      aria-label="inUse"
+                      color="danger"
+                    />
+                  </div>
+                </CardFooter>
+              </Card>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
