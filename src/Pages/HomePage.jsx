@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Navigate, useNavigate } from "react-router-dom";
 import AddProfiles from "../components/AddProfiles";
-import ExportProfiles from "../components/ExportProfiles";
+import DeleteProfile from "../components/DeleteProfile";
 import {
   Card,
   Chip,
@@ -102,19 +102,6 @@ function HomePage() {
       });
   };
 
-  const handleDelete = (profile) => {
-    axios
-      .delete(`http://localhost:8080/api/profiles/${profile.id}/delete`)
-      .then(((response) => {
-        console.log("DELETE response", response);
-        if (response.status === 204) {
-          setFetchProfiles(true);
-        } else {
-          console.log("DELETE Failed");
-        }
-      }))
-  }
-
   return (
     <div className="p-4">
       <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
@@ -180,14 +167,7 @@ function HomePage() {
               <Divider />
               <CardFooter>
                 <EditProfile selectedProfile={profile} />
-                <Button
-                  color="danger"
-                  className=" left-3 cursor-pointer"
-                  variant="ghost"
-                  onPress={() => handleDelete(profile)}
-                >
-                  Delete
-                </Button>
+                <DeleteProfile selectedProfile={profile} setFetchProfiles={setFetchProfiles} />
                 <Switch
                   isSelected={profile.inUse}
                   onValueChange={() => handleSetIsInUse(profile, user)}

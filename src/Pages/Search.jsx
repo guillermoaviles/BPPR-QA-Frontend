@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ExportProfiles from "../components/ExportProfiles";
+import DeleteProfile from "../components/DeleteProfile";
 import {
   Input,
   Select,
@@ -46,7 +47,7 @@ function Search() {
   });
   const [profiles, setProfiles] = useState([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [searchDone, setSearchDone] = useState(false);
+  const [makeSearch, setMakeSearch] = useState(true);
 
   const environments = [
     { label: "DEV", value: "DEV" },
@@ -90,9 +91,12 @@ function Search() {
         `http://localhost:8080/api/profiles/search?${search}`
       );
       setProfiles(response.data);
-      setSearchDone(true);
+      setMakeSearch(false)
     } catch (error) {
       console.error("Failed to fetch profiles", error);
+    }
+    if (makeSearch) {
+      fetchProfiles();
     }
   };
 
@@ -365,7 +369,7 @@ function Search() {
           </Modal>
         </div>
         <div className="col-span-3">
-          {searchDone && (
+          {!makeSearch && profiles.length > 0 && (
             <Card className="sm">
               <CardBody>
                 <div className="space-y-4">
@@ -465,22 +469,24 @@ function Search() {
                             </div>
                           </div>
                           <CardFooter>
-                            <Button className="-ml-3" color="primary" variant="ghost">
+                            <Button
+                              className="-ml-3"
+                              color="primary"
+                              variant="ghost"
+                            >
                               Edit
                             </Button>
-                            <Button
-                              color="danger"
-                              className=" left-3 cursor-pointer"
-                              variant="ghost"
-                              onPress={() => handleDelete(profile)}
-                            >
-                              Delete
-                            </Button>
+                            <DeleteProfile
+                              selectedProfile={profile}
+                              setFetchProfiles={setMakeSearch}
+                            />
                             <Switch
+                              isSelected={profile.inUse}
                               onValueChange={() => handleSetIsInUse(profile)}
                               className="ml-7"
                               aria-label="inUse"
                               size="lg"
+                              color="danger"
                             />
                           </CardFooter>
                         </CardBody>
