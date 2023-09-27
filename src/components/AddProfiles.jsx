@@ -83,14 +83,13 @@ function AddProfiles({setFetchProfiles}) {
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
-          //   handleGetProfiles();
+          setFetchProfiles(true);
         } else {
           console.log("POST Failed");
         }
       });
     handleClearForm();
     setProfiles([]);
-    setFetchProfiles(true);
   };
 
   const handleCreateJSONs = () => {
@@ -99,7 +98,7 @@ function AddProfiles({setFetchProfiles}) {
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
-          //   handleGetProfiles();
+          setFetchProfiles(true);
         } else {
           console.log("POST Failed");
         }
