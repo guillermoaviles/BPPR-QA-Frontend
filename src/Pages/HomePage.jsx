@@ -161,10 +161,11 @@ function HomePage() {
               </CardBody>
               <Divider />
               <CardFooter>
-                <Button color="primary">Edit</Button>
+                <Button color="primary" variant="ghost">Edit</Button>
                 <Button
-                  color="warning"
-                  className="text-white left-3 bg-danger cursor-pointer"
+                  color="danger"
+                  className=" left-3 cursor-pointer"
+                  variant="ghost"
                 >
                   Delete
                 </Button>
