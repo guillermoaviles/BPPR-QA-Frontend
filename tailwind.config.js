@@ -7,7 +7,13 @@ module.exports = {
     "./src/**/*.{html,jsx,tsx,ts,js,css,mdx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: "#2d2b5c",
+        }
+      }
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
