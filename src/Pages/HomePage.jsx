@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import AddProfiles from "../components/AddProfiles";
 import ExportProfiles from "../components/ExportProfiles";
 import {
@@ -11,24 +12,23 @@ import {
   CardFooter,
   Divider,
   Button,
-  useDisclosure,
   Switch,
-  Checkbox,
   Tooltip,
-  Input,
-  Link,
   Image,
 } from "@nextui-org/react";
-import { MailIcon } from "../assets/MailIcon";
 import { LockIcon } from "../assets/LockIcon";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
-import NavbarComp from "../components/NavbarComp";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
+  const [fetchProfiles, setFetchProfiles] = useState(true);
+  const navigate = useNavigate();
 
-
+  const handlePress = (id) => {
+    console.log("pressed")
+    navigate(`/profile/${id}`)
+  }
   useEffect(() => {
     const handleGetProfiles = async () => {
       try {
@@ -99,12 +99,11 @@ function HomePage() {
 
   return (
     <div className="p-4">
-    <NavbarComp />
       <h1 className="text-xl font-bold underline mb-4">Hello world!</h1>
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
         {profiles?.map((profile) => {
           return (
-            <Card key={profile.id} className="w-[325px] h-[235px]">
+            <Card isPressable onPress={() => handlePress(profile.id)} key={profile.id} className="w-[325px] h-[235px]">
               <CardHeader className="flex gap-3">
                 <Image
                   alt="nextui logo"
