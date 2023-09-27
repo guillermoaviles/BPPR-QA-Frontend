@@ -20,7 +20,7 @@ import {
 } from "@nextui-org/react";
 import avatar from "../assets/avatar.png";
 
-function AddProfiles() {
+function AddProfiles({setFetchProfiles}) {
   const [profiles, setProfiles] = useState([]);
   const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [formData, setFormData] = useState({
@@ -90,6 +90,7 @@ function AddProfiles() {
       });
     handleClearForm();
     setProfiles([]);
+    setFetchProfiles(true);
   };
 
   const handleCreateJSONs = () => {
@@ -105,6 +106,7 @@ function AddProfiles() {
       });
     handleClearForm();
     setProfiles([]);
+    setFetchProfiles(true);
   };
 
   const handleCreateBoth = () => {
@@ -112,6 +114,7 @@ function AddProfiles() {
     handleCreateJSONs();
     handleClearForm();
     setProfiles([]);
+    setFetchProfiles(true);
   };
 
   const handleDeleteProfile = (index) => {
@@ -160,7 +163,7 @@ function AddProfiles() {
 
   return (
     <div className="">
-      <Button onPress={onOpen} color="primary">
+      <Button onPress={onOpen} size="lg" color="primary">
         Add Profile
       </Button>
       <Modal
