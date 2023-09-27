@@ -20,7 +20,7 @@ import {
 } from "@nextui-org/react";
 import avatar from "../assets/avatar.png";
 
-function AddProfiles({setFetchProfiles}) {
+function AddProfiles({ setFetchProfiles }) {
   const [profiles, setProfiles] = useState([]);
   const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [formData, setFormData] = useState({
@@ -161,7 +161,7 @@ function AddProfiles({setFetchProfiles}) {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <Button onPress={onOpen} size="lg" color="primary">
         Add Profile
       </Button>
@@ -502,57 +502,13 @@ function AddProfiles({setFetchProfiles}) {
           )}
         </ModalContent>
       </Modal>
-      <div className="flex justify-center">
+      <div className="mt-8 w-full">
         {profiles.length > 0 && (
-          <div className="w-[1100px] mx-auto rounded-lg shadow-lg mt-10">
-            <div className="font-bold text-xl p-10">
+          <Card className="">
+            <div className="font-bold text-xl m-4">
               Profiles to Add: ({profiles.length})
             </div>
-            <div className="m-auto flex flex-wrap justify-evenly p-4">
-              {profiles?.map((profile, index) => (
-                <Card key={index} className="w-[325px] h-[235px] mb-4">
-                  <CardHeader className="flex gap-3">
-                    <Image
-                      alt="nextui logo"
-                      height={40}
-                      radius="sm"
-                      src={avatar}
-                      width={40}
-                    />
-                  </CardHeader>
-                  <Divider />
-                  <CardBody>
-                    <div className="flex space-x-4 text-small items-center">
-                      <div className="text-gray-700 font-bold">
-                        Profile User Id:
-                      </div>
-                      <div>{" " + profile.profileUserId}</div>
-                    </div>
-                    <div className="flex space-x-4 text-small items-center">
-                      <div className="text-gray-700 font-bold">Username:</div>
-                      <div>{profile.username}</div>
-                    </div>
-                    <div className="flex space-x-4 text-small items-center">
-                      <div className="text-gray-700 font-bold">
-                        Account Type:
-                      </div>
-                      <div>{profile.accountType}</div>
-                    </div>
-                  </CardBody>
-                  <Divider />
-                  <CardFooter>
-                    <Button color="primary">Edit</Button>
-                    <Button
-                      className="text-white bg-danger cursor-pointer left-3"
-                      onClick={() => handleDeleteProfile(index)}
-                    >
-                      Delete
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-            <div className="flex flex-col w-[210px] mx-auto mt-4 p-4">
+            <div className="flex flex-col m-4">
               <Button
                 className="text-white cursor-pointer"
                 onClick={handleCreateProfiles}
@@ -580,7 +536,53 @@ function AddProfiles({setFetchProfiles}) {
                 )}
               </Button>
             </div>
-          </div>
+            <div className="border-2 border-blue-400 ">
+              {profiles?.map((profile, index) => (
+                <div className="border-2 border-yellow-500 m-8">
+                  <Card key={index} className="">
+                    <CardHeader className="">
+                      <Image
+                        alt="nextui logo"
+                        height={40}
+                        radius="sm"
+                        src={avatar}
+                        width={40}
+                      />
+                    </CardHeader>
+                    <Divider />
+                    <CardBody>
+                      <div className="flex space-x-4 text-small items-center">
+                        <div className="text-gray-700 font-bold">
+                          Profile User Id:
+                        </div>
+                        <div>{" " + profile.profileUserId}</div>
+                      </div>
+                      <div className="flex space-x-4 text-small items-center">
+                        <div className="text-gray-700 font-bold">Username:</div>
+                        <div>{profile.username}</div>
+                      </div>
+                      <div className="flex space-x-4 text-small items-center">
+                        <div className="text-gray-700 font-bold">
+                          Account Type:
+                        </div>                        <div>{profile.accountType}</div>
+                      </div>
+                    </CardBody>
+                    <Divider />
+                    <CardFooter>
+                      <Button color="primary">Edit</Button>
+                      <Button
+                        className="text-white bg-danger cursor-pointer left-3"
+                        onClick={() => handleDeleteProfile(index)}
+                      >
+                        Delete
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            
+          </Card>
         )}
       </div>
     </div>
