@@ -97,6 +97,19 @@ function HomePage() {
       });
   };
 
+  const handleDelete = (profile) => {
+    axios
+      .delete(`http://localhost:8080/api/profiles/${profile.id}/delete`)
+      .then(((response) => {
+        console.log("DELETE response", response);
+        if (response.status === 204) {
+          setFetchProfiles(true);
+        } else {
+          console.log("DELETE Failed");
+        }
+      }))
+  }
+
   return (
     <div className="p-4">
       <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
@@ -166,11 +179,12 @@ function HomePage() {
                   color="danger"
                   className=" left-3 cursor-pointer"
                   variant="ghost"
+                  onPress={() => handleDelete(profile)}
                 >
                   Delete
                 </Button>
                 <Switch
-                  onValueChange={() => handleSetIsInUse(profile)} // Wrap the function call in a lambda
+                  onValueChange={() => handleSetIsInUse(profile)}
                   className="ml-20"
                   aria-label="inUse"
                 />
