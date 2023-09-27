@@ -113,7 +113,7 @@ function HomePage() {
 
   return (
     <div className="p-4">
-      <div className="w-[1100px] h-[50vh] m-auto flex flex-wrap justify-evenly">
+      <div className={`w-[1100px] m-auto flex flex-wrap justify-evenly ${profiles.length > 0 ? "h-[50vh]" : "h-[10vh]"}`}>
         {profiles?.map((profile) => {
           return (
             <Card isPressable onPress={() => handlePress(profile.id)} key={profile.id} className="w-[325px] h-[235px]">
@@ -195,8 +195,7 @@ function HomePage() {
         })}
       </div>
       <div className="flex flex-col">
-        <AddProfiles />
-        <ExportProfiles />
+        <AddProfiles setFetchProfiles={setFetchProfiles} />
       </div>
     </div>
   );

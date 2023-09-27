@@ -20,7 +20,7 @@ import {
 } from "@nextui-org/react";
 import avatar from "../assets/avatar.png";
 
-function AddProfiles() {
+function AddProfiles({setFetchProfiles}) {
   const [profiles, setProfiles] = useState([]);
   const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [formData, setFormData] = useState({
@@ -83,7 +83,7 @@ function AddProfiles() {
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
-          //   handleGetProfiles();
+          setFetchProfiles(true);
         } else {
           console.log("POST Failed");
         }
@@ -98,13 +98,14 @@ function AddProfiles() {
       .then((response) => {
         console.log("POST response", response);
         if (response.status === 201) {
-          //   handleGetProfiles();
+          setFetchProfiles(true);
         } else {
           console.log("POST Failed");
         }
       });
     handleClearForm();
     setProfiles([]);
+    setFetchProfiles(true);
   };
 
   const handleCreateBoth = () => {
@@ -112,6 +113,7 @@ function AddProfiles() {
     handleCreateJSONs();
     handleClearForm();
     setProfiles([]);
+    setFetchProfiles(true);
   };
 
   const handleDeleteProfile = (index) => {
@@ -160,7 +162,7 @@ function AddProfiles() {
 
   return (
     <div className="">
-      <Button onPress={onOpen} color="primary">
+      <Button onPress={onOpen} size="lg" color="primary">
         Add Profile
       </Button>
       <Modal
