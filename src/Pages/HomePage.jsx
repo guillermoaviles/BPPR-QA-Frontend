@@ -104,7 +104,7 @@ function HomePage() {
 
   return (
     <div className="grid grid-cols-4 p-4">
-      <div className="flex m-4">
+      <div className="flex m-2">
         <AddProfiles setFetchProfiles={setFetchProfiles} />
       </div>
       <div className="col-span-3">
