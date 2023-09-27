@@ -19,6 +19,7 @@ import {
 import { LockIcon } from "../assets/LockIcon";
 import { UnlockIcon } from "../assets/UnlockIcon";
 import avatar from "../assets/avatar.png";
+import EditProfile from "../components/EditProfile";
 
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
@@ -161,7 +162,7 @@ function HomePage() {
               </CardBody>
               <Divider />
               <CardFooter>
-                <Button color="primary" variant="ghost">Edit</Button>
+                <EditProfile selectedProfile={profile} />
                 <Button
                   color="danger"
                   className=" left-3 cursor-pointer"

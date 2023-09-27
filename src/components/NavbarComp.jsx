@@ -47,7 +47,7 @@ export default function NavbarComp() {
               as={Link}
               color="primary"
               href="/"
-              variant="bordered"
+              variant="ghost"
             >
               Log Out
             </Button>
