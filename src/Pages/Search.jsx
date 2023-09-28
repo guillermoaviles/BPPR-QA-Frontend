@@ -241,57 +241,58 @@ function Search() {
                         type="text"
                         name="profileUserId"
                         value={params.profileUserId}
-                        placeholder="Profile User Id"
+                        label="Profile User Id"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="username"
                         value={params.username}
-                        placeholder="Username"
+                        label="Username"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="pass"
                         value={params.pass}
-                        placeholder="Password"
+                        label="Password"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="email"
                         value={params.email}
-                        placeholder="Email"
+                        label="Email"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="firstName"
                         value={params.firstName}
-                        placeholder="First Name"
+                        label="First Name"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="lastName"
                         value={params.lastName}
-                        placeholder="Last Name"
+                        label="Last Name"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="maidenName"
                         value={params.maidenName}
-                        placeholder="Maiden Name"
+                        label="Maiden Name"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="date"
                         name="birthdate"
                         value={params.birthdate}
-                        placeholder="Birthdate"
+                        label="Birthdate"
                         onChange={handleInputChange}
+                        labelPlacement="outside-left"
                       />
                       <Select
                         items={accountTypes}
@@ -331,21 +332,21 @@ function Search() {
                         type="text"
                         name="accountNumber"
                         value={params.accountNumber}
-                        placeholder="Account Number"
+                        label="Account Number"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="accountNickname"
                         value={params.accountNickname}
-                        placeholder="Account Nickname"
+                        label="Account Nickname"
                         onChange={handleInputChange}
                       />
                       <Input
                         type="text"
                         name="accountBalance"
                         value={params.accountBalance}
-                        placeholder="Account Balance"
+                        label="Account Balance"
                         onChange={handleInputChange}
                       />
                     </div>

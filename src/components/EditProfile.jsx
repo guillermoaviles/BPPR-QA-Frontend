@@ -16,15 +16,18 @@ import {
 
 export default function EditProfile({ selectedProfile }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [profile, setProfile] = useState({ ...selectedProfile });
-
   const handleInputChange = (e) => {
     const { name, type, value, checked } = e.target;
     setProfile((prevProfile) => ({
       ...prevProfile,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    if (name === "addPayee") {
+      setShowPayeeFields(checked);
+    }
   };
 
   const environments = [
@@ -79,14 +82,17 @@ export default function EditProfile({ selectedProfile }) {
             <>
               <ModalHeader>Edit Profile</ModalHeader>
               <ModalBody>
-                <Checkbox
-                  isSelected={profile.inUse}
-                  name="inUse"
-                  placeholder="In Use"
-                  onChange={handleInputChange}
-                >
-                  In Use
-                </Checkbox>
+                {/* <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">In Use:</span>
+                  <Checkbox
+                    isSelected={profile.inUse}
+                    name="inUse"
+                    value={profile.inUse}
+                    placeholder="In Use"
+                    onChange={handleInputChange}
+                  />
+                </label> */}
+
                 <Select
                   items={environments}
                   label="Environment"
@@ -128,7 +134,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="profileUserId"
                   value={profile.profileUserId}
-                  placeholder="Profile User Id"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -136,7 +141,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="username"
                   value={profile.username}
-                  placeholder="Username"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -144,7 +148,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="pass"
                   value={profile.pass}
-                  placeholder="Password"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -152,7 +155,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="email"
                   value={profile.email}
-                  placeholder="Email"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -160,7 +162,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="firstName"
                   value={profile.firstName}
-                  placeholder="First Name"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -168,7 +169,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="lastName"
                   value={profile.lastName}
-                  placeholder="Last Name"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -176,7 +176,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="maidenName"
                   value={profile.maidenName}
-                  placeholder="Maiden Name"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -184,7 +183,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="birthdate"
                   value={profile.birthdate}
-                  placeholder="Birthdate"
                   onChange={handleInputChange}
                 />
                 <Select
@@ -228,7 +226,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="accountNumber"
                   value={profile.accountNumber}
-                  placeholder="Account Number"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -236,7 +233,6 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="accountNickname"
                   value={profile.accountNickname}
-                  placeholder="Account Nickname"
                   onChange={handleInputChange}
                 />
                 <Input
@@ -244,156 +240,183 @@ export default function EditProfile({ selectedProfile }) {
                   type="text"
                   name="accountBalance"
                   value={profile.accountBalance}
-                  placeholder="Account Balance"
                   onChange={handleInputChange}
                 />
-                <Checkbox
-                  isSelected={profile.personalInformationEmail}
-                  name="personalInformationEmail"
-                  value={profile.personalInformationEmail}
-                  placeholder="Personal Information Email"
-                  onChange={handleInputChange}
-                >
-                  Personal Information Email
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.personalInformationPhone}
-                  name="personalInformationPhone"
-                  value={profile.personalInformationPhone}
-                  placeholder="Personal Information Phone"
-                  onChange={handleInputChange}
-                >
-                  Personal Information Phone
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.personalInformationAddress}
-                  name="personalInformationAddress"
-                  value={profile.personalInformationAddress}
-                  placeholder="Personal Information Address"
-                  onChange={handleInputChange}
-                >
-                  Personal Information Address
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.personalInformationPassword}
-                  name="personalInformationPassword"
-                  value={profile.personalInformationPassword}
-                  placeholder="Personal Information Password"
-                  onChange={handleInputChange}
-                >
-                  Personal Information Password
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.personalInformationQuestions}
-                  name="personalInformationQuestions"
-                  value={profile.personalInformationQuestions}
-                  placeholder="Personal Information Questions"
-                  onChange={handleInputChange}
-                >
-                  Personal Information Questions
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.paymentMakePayments}
-                  name="paymentMakePayments"
-                  value={profile.paymentMakePayments}
-                  placeholder="Payment Make Payments"
-                  onChange={handleInputChange}
-                >
-                  Payment Make Payments
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.cancelFutureTransfer}
-                  name="cancelFutureTransfer"
-                  value={profile.cancelFutureTransfer}
-                  placeholder="Cancel Future Transfer"
-                  onChange={handleInputChange}
-                >
-                  Cancel Future Transfer
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.makeFuturePayment}
-                  name="makeFuturePayment"
-                  value={profile.makeFuturePayment}
-                  placeholder="Make Future Payment"
-                  onChange={handleInputChange}
-                >
-                  Make Future Payment
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.makeFutureTransfer}
-                  name="makeFutureTransfer"
-                  value={profile.makeFutureTransfer}
-                  placeholder="Make Future Transfer"
-                  onChange={handleInputChange}
-                >
-                  Make Future Transfer
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.deleteFuturePayment}
-                  name="deleteFuturePayment"
-                  value={profile.deleteFuturePayment}
-                  placeholder="Delete Future Payment"
-                  onChange={handleInputChange}
-                >
-                  Delete Future Payment
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.editFuturePayment}
-                  name="editFuturePayment"
-                  value={profile.editFuturePayment}
-                  placeholder="Edit Future Payment"
-                  onChange={handleInputChange}
-                >
-                  Edit Future Payment
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.onOffService}
-                  name="onOffService"
-                  value={profile.onOffService}
-                  placeholder="On Off Service"
-                  onChange={handleInputChange}
-                >
-                  On Off Service
-                </Checkbox>
-                <Checkbox
-                  isSelected={profile.addPayee}
-                  name="addPayee"
-                  value={profile.addPayee}
-                  placeholder="Add Payee"
-                  onChange={handleInputChange}
-                >
-                  Add Payee
-                </Checkbox>
-                <Input
-                  type="text"
-                  name="nickname"
-                  value={profile.nickname}
-                  placeholder="Nickname"
-                  onChange={handleInputChange}
-                />
-                <Input
-                  type="text"
-                  name="payeeName"
-                  value={profile.payeeName}
-                  placeholder="Payee Name"
-                  onChange={handleInputChange}
-                />
-                <Input
-                  type="text"
-                  name="payeeAccountNumber"
-                  value={profile.payeeAccountNumber}
-                  placeholder="Payee Account Number"
-                  onChange={handleInputChange}
-                />
-                <Checkbox
-                  isSelected={profile.eBill}
-                  name="eBill"
-                  value={profile.eBill}
-                  placeholder="E Bill"
-                  onChange={handleInputChange}
-                >
-                  eBill
-                </Checkbox>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">
+                    Personal Information Email:
+                  </span>
+                  <Checkbox
+                    isSelected={profile.personalInformationEmail}
+                    name="personalInformationEmail"
+                    value={profile.personalInformationEmail}
+                    placeholder="Personal Information Email"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">
+                    Personal Information Phone:
+                  </span>
+                  <Checkbox
+                    isSelected={profile.personalInformationPhone}
+                    name="personalInformationPhone"
+                    value={profile.personalInformationPhone}
+                    placeholder="Personal Information Phone"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">
+                    Personal Information Address:
+                  </span>
+                  <Checkbox
+                    isSelected={profile.personalInformationAddress}
+                    name="personalInformationAddress"
+                    value={profile.personalInformationAddress}
+                    placeholder="Personal Information Address"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">
+                    Personal Information Password:
+                  </span>
+                  <Checkbox
+                    isSelected={profile.personalInformationPassword}
+                    name="personalInformationPassword"
+                    value={profile.personalInformationPassword}
+                    placeholder="Personal Information Password"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">
+                    Personal Information Questions:
+                  </span>
+                  <Checkbox
+                    isSelected={profile.personalInformationQuestions}
+                    name="personalInformationQuestions"
+                    value={profile.personalInformationQuestions}
+                    placeholder="Personal Information Questions"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Payment Make Payments:</span>
+                  <Checkbox
+                    isSelected={profile.paymentMakePayments}
+                    name="paymentMakePayments"
+                    value={profile.paymentMakePayments}
+                    placeholder="Payment Make Payments"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Cancel Future Transfer:</span>
+                  <Checkbox
+                    isSelected={profile.cancelFutureTransfer}
+                    name="cancelFutureTransfer"
+                    value={profile.cancelFutureTransfer}
+                    placeholder="Cancel Future Transfer"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Make Future Payment:</span>
+                  <Checkbox
+                    isSelected={profile.makeFuturePayment}
+                    name="makeFuturePayment"
+                    value={profile.makeFuturePayment}
+                    placeholder="Make Future Payment"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Make Future Transfer:</span>
+                  <Checkbox
+                    isSelected={profile.makeFutureTransfer}
+                    name="makeFutureTransfer"
+                    value={profile.makeFutureTransfer}
+                    placeholder="Make Future Transfer"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Delete Future Payment:</span>
+                  <Checkbox
+                    isSelected={profile.deleteFuturePayment}
+                    name="deleteFuturePayment"
+                    value={profile.deleteFuturePayment}
+                    placeholder="Delete Future Payment"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Edit Future Payment:</span>
+                  <Checkbox
+                    isSelected={profile.editFuturePayment}
+                    name="editFuturePayment"
+                    value={profile.editFuturePayment}
+                    placeholder="Edit Future Payment"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">On/Off Service:</span>
+                  <Checkbox
+                    isSelected={profile.onOffService}
+                    name="onOffService"
+                    value={profile.onOffService}
+                    placeholder="On Off Service"
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label className="block flex justify-between items-center">
+                  <span className="text-gray-700">Add Payee:</span>
+                  <Checkbox
+                    isSelected={profile.addPayee}
+                    name="addPayee"
+                    value={profile.addPayee}
+                    onChange={handleInputChange}
+                  />
+                </label>
+
+                {showPayeeFields && (
+                  <>
+                    <Input
+                      type="text"
+                      name="nickname"
+                      value={profile.nickname}
+                      label="Nickname"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="payeeName"
+                      value={profile.payeeName}
+                      label="Payee Name"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="payeeAccountNumber"
+                      value={profile.payeeAccountNumber}
+                      label="Payee Account Number"
+                      onChange={handleInputChange}
+                    />
+                    <label className="block flex justify-between items-center">
+                      <span className="text-gray-700">E-Bill:</span>
+                      <Checkbox
+                        name="ebill"
+                        isSelected={profile.eBill}
+                        onChange={handleInputChange}
+                        value={profile.eBill}
+                        placeholder="E Bill"
+                      />
+                    </label>
+                  </>
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button auto onClick={onClose} color="danger">
