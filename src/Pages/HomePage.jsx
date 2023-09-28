@@ -103,7 +103,8 @@ function HomePage() {
   };
 
   return (
-    <div className="grid grid-cols-4 p-4">
+    <div className="min-h-screen bg-app">
+      <div className="mt-20 grid grid-cols-4 p-4 ">
       <div className="flex m-2">
         <AddProfiles setFetchProfiles={setFetchProfiles} />
       </div>
@@ -199,6 +200,8 @@ function HomePage() {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 }
 

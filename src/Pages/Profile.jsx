@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardFooter,
   Chip,
+  Checkbox,
   Tooltip,
   Divider,
   Image,
@@ -93,7 +94,7 @@ export default function Profile() {
 
   const fullName = `${profile.firstName} ${profile.lastName}`;
   return (
-    <div className="m-20">
+    <div className="min-h-screen bg-app m-20">
       {/* {profile ? ( */}
       <Card>
         <div>
@@ -214,19 +215,11 @@ export default function Profile() {
                   <div className="mt-4 ml-4 space-y-2 grid grid-rows">
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Email:</p>{" "}
-                      {profile.personalInformationEmail ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                        <Checkbox isSelected={profile.personalInformationEmail} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Phone:</p>{" "}
-                      {profile.personalInformationPhone ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                       <Checkbox isSelected={profile.personalInformationPhone} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Address:</p>{" "}

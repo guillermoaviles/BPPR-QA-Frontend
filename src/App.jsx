@@ -12,7 +12,7 @@ import NavbarComp from "./components/NavbarComp";
 function App() {
   return (
 
-    <div className="text-center">
+    <div className="font-monserrat text-center bg-app">
       <NavbarComp />
       <Routes>
         <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>}/>
