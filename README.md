@@ -10,6 +10,7 @@ This is only the frontend repository, check out our backend repository:
 2. [Features](#features)
 3. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
+   - [Routes](#routes)
 5. [Documentation](#documentation)
    - [Class Diagram](#class-diagram)
    - [Use Case Diagram](#use-case-diagram)
@@ -50,6 +51,8 @@ npm install
 ```
 npm start
 ```
+### Routes
+
 
 # Documentation
 
