@@ -51,6 +51,7 @@ npm install
 ```
 npm start
 ```
+5. Project is running on  `localhost:3000`
 ### Routes
 
 
