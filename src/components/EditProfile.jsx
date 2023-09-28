@@ -82,17 +82,6 @@ export default function EditProfile({ selectedProfile }) {
             <>
               <ModalHeader>Edit Profile</ModalHeader>
               <ModalBody>
-                {/* <label className="block flex justify-between items-center">
-                  <span className="text-gray-700">In Use:</span>
-                  <Checkbox
-                    isSelected={profile.inUse}
-                    name="inUse"
-                    value={profile.inUse}
-                    placeholder="In Use"
-                    onChange={handleInputChange}
-                  />
-                </label> */}
-
                 <Select
                   items={environments}
                   label="Environment"
