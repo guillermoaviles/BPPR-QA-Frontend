@@ -1,71 +1,67 @@
-# Getting Started with Create React App
+# QA Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Welcome to Test Profile Manager** – your one-stop solution to efficiently manage, create, and interact with testing profiles. Designed with simplicity and versatility in mind, this application combines a user-friendly interface with powerful features to streamline profile management for testing environments.
 
-## Available Scripts
+This is only the frontend repository, check out our backend repository:
+[QA-Backend Repository](https://github.com/guillermoaviles/BPPR-QA-Backend)
 
-In the project directory, you can run:
+## Table of Contents
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+5. [Documentation](#documentation)
+   - [Class Diagram](#class-diagram)
+   - [Use Case Diagram](#use-case-diagram)
+6. [Team](#team)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Crafted with a React Frontend and a robust Java/Spring Boot Backend, Test Profile Manager is a seamless integration of design and functionality. The application is constructed to ensure a smooth and reliable user experience.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Manage Testing Profiles**: Seamlessly create, modify, and remove profiles while identifying active ones.
+- **Profile Ownership & Locking**: Enhanced transparency with display features for user details on active profiles.
+- **Search & Filter**: Efficiently locate profiles with our refined search and filter capabilities.
+- **Bulk Operations & JSON Integration**: Export and import multiple profiles effortlessly with JSON.
+- **Flexible Profile Creation**: Experience the ease of creating profiles with optional attributes.
+- **Authentication**: Secure user authentication with sign-up, login, and logout functionalities.
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these steps to get a copy of the project up and running on your local machine for development and testing purposes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+1. Clone the Repository
+```
+git clone https://github.com/guillermoaviles/BPPR-QA-Frontend.git
+```
+2. Navigate to the Project Directory
+```
+cd BPPR-QA-Frontend
+```
+3. Install Dependencies
+```
+npm install
+```
+4. Start the project
+```
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Documentation
 
-### `npm run eject`
+## MiBanco Technical Documentation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Class Diagram
+![Class Diagram](https://github.com/guillermoaviles/BPPR-QA-Frontend/assets/19162359/a349fdb5-e43e-498f-bd18-48a29ec1245e)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Use Case Diagram
+![Use Case Diagram](https://github.com/guillermoaviles/BPPR-QA-Frontend/assets/19162359/0d257f69-0ade-4a06-87c4-fe98713d908d)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# BPPR-QA-Frontend
+# Team:
+- [Merianni Nuñez Tejeda](https://github.com/merianni)
+- [Guillermo Aviles](https://github.com/guillermoaviles)
