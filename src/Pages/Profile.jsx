@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardFooter,
   Chip,
+  Checkbox,
   Tooltip,
   Divider,
   Image,
@@ -93,7 +94,7 @@ export default function Profile() {
 
   const fullName = `${profile.firstName} ${profile.lastName}`;
   return (
-    <div className="m-20">
+    <div className="h-screen pt-36 p-16 bg-app">
       {/* {profile ? ( */}
       <Card>
         <div>
@@ -214,47 +215,27 @@ export default function Profile() {
                   <div className="mt-4 ml-4 space-y-2 grid grid-rows">
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Email:</p>{" "}
-                      {profile.personalInformationEmail ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                        <Checkbox isSelected={profile.personalInformationEmail} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Phone:</p>{" "}
-                      {profile.personalInformationPhone ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                       <Checkbox isSelected={profile.personalInformationPhone} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">Personal Information Address:</p>{" "}
-                      {profile.personalInformationAddress ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                        <Checkbox isSelected={profile.personalInformationAddress} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">
                         Personal Information Password:
                       </p>{" "}
-                      {profile.personalInformationPassword ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                        <Checkbox isSelected={profile.personalInformationPassword} size="md"/>
                     </div>
                     <div className="flex justify-between">
                       <p className="font-bold">
                         Personal Information Questions:
                       </p>{" "}
-                      {profile.personalInformationQuestions ? (
-                        <Chip color="primary">True</Chip>
-                      ) : (
-                        <Chip color="danger">False</Chip>
-                      )}
+                        <Checkbox isSelected={profile.personalInformationQuestions} size="md"/>
                     </div>
                   </div>
                 </div>
@@ -273,20 +254,12 @@ export default function Profile() {
               <div className="m-8 space-y-2 w-4/6">
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Add Payee:</p>{" "}
-                  {profile.addPayee ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                  <Checkbox isSelected={profile.addPayee} size="md"/>
                 </div>
 
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">eBill:</p>{" "}
-                  {profile.eBill ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                  <Checkbox isSelected={profile.eBill} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Nickname:</p> {profile?.nickname}
@@ -302,61 +275,33 @@ export default function Profile() {
               <div className="m-8 space-y-2 w-4/6">
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">On/Off Service:</p>{" "}
-                  {profile.onOffService ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.onOffService} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Make Payments:</p>{" "}
-                  {profile.paymentMakePayments ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.paymentMakePayments} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Make Future Payment:</p>{" "}
-                  {profile.makeFuturePayment ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.makeFuturePayment} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Delete Future Payment:</p>{" "}
-                  {profile.deleteFuturePayment ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.deleteFuturePayment} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Edit Future Payment:</p>{" "}
-                  {profile.editFuturePayment ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.editFuturePayment} size="md"/>
                 </div>
               </div>
               <div className="mt-8 space-y-2 w-4/6">
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Make Future Transfer:</p>{" "}
-                  {profile.makeFutureTransfer ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.makeFutureTransfer} size="md"/>
                 </div>
                 <div className="flex justify-between space-x-4">
                   <p className="font-bold">Cancel Future Transfer:</p>{" "}
-                  {profile.cancelFutureTransfer ? (
-                    <Chip color="primary">True</Chip>
-                  ) : (
-                    <Chip color="danger">False</Chip>
-                  )}
+                    <Checkbox isSelected={profile.cancelFutureTransfer} size="md"/>
                 </div>
               </div>
             </div>
