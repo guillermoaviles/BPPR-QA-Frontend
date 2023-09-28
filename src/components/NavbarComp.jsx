@@ -23,7 +23,7 @@ export default function NavbarComp() {
     return location.pathname === path;
   };
   return (
-    <div>
+    <div className="-mb-[65.23px]">
       <Navbar isBordered>
         <NavbarBrand>
           <Link to="/">

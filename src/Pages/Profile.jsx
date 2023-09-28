@@ -94,7 +94,7 @@ export default function Profile() {
 
   const fullName = `${profile.firstName} ${profile.lastName}`;
   return (
-    <div className="min-h-screen bg-app m-20">
+    <div className="h-screen pt-36 p-16 bg-app">
       {/* {profile ? ( */}
       <Card>
         <div>

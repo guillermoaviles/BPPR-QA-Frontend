@@ -171,7 +171,7 @@ function Search() {
   };
 
   return (
-    <div className="m-8">
+    <div className="h-screen pt-36 bg-app p-8">
       <div className="grid grid-cols-4 gap-4">
         <div>
           <Card className="sm">
