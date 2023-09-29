@@ -157,19 +157,6 @@ function Search() {
       });
   };
 
-  const handleDelete = (profile) => {
-    axios
-      .delete(`http://localhost:8080/api/profiles/${profile.id}/delete`)
-      .then((response) => {
-        console.log("DELETE response", response);
-        if (response.status === 204) {
-          // setFetchProfiles(true);
-        } else {
-          console.log("DELETE Failed");
-        }
-      });
-  };
-
   return (
     <div className="pt-32 bg-app p-8">
       <div className="flex flex-col max-w-4xl m-auto">

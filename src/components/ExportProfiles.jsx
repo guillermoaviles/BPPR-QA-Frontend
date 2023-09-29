@@ -22,7 +22,12 @@ function ExportProfiles({ selectedProfiles }) {
 
   return (
     <div>
-      <Button color="warning" className="w-full text-white" onClick={handleAddProfile}>
+      <Button
+        color="warning"
+        className="w-full text-white"
+        onClick={handleAddProfile}
+        isDisabled={selectedProfiles.length === 0}
+      >
         Export Profiles
       </Button>
     </div>
