@@ -58,6 +58,7 @@ npm start
 # Documentation
 
 ## MiBanco Technical Documentation
+[View Here](https://docs.google.com/document/d/1N-6HjhP6MUFbh15LUc7hSchip-0jwWlZ/edit?usp=sharing&ouid=112740178667691118982&rtpof=true&sd=true)
 
 ## Class Diagram
 ![Class Diagram](https://github.com/guillermoaviles/BPPR-QA-Frontend/assets/19162359/a349fdb5-e43e-498f-bd18-48a29ec1245e)
