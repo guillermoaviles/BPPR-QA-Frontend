@@ -12,6 +12,7 @@ This is only the frontend repository, check out our backend repository:
    - [Prerequisites](#prerequisites)
    - [Routes](#routes)
 5. [Documentation](#documentation)
+   - [MiBanco Technical Documentation](#mibanco-technical-documentation)
    - [Class Diagram](#class-diagram)
    - [Use Case Diagram](#use-case-diagram)
 6. [Team](#team)
