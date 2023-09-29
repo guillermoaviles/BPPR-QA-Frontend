@@ -539,7 +539,7 @@ function AddProfiles({ setFetchProfiles }) {
       </Modal>
       <div className="mt-8 w-full mb-8">
         {profiles.length > 0 && (
-          <Card>
+          <Card className="bg-lightBlue">
             <div className="font-bold text-xl m-4">
               Profiles to Add: ({profiles.length})
             </div>

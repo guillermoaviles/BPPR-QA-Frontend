@@ -13,6 +13,7 @@ module.exports = {
       },
       backgroundColor: {
         'app': '#f0f0f0',
+        'lightGray': '#f6f5f4'
       },
       colors: {
         primary: {

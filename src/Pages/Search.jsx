@@ -174,7 +174,7 @@ function Search() {
     <div className="pt-32 bg-app p-8">
       <div className="flex flex-col max-w-4xl m-auto">
         <div className="w-[325px] m-auto pb-16">
-          <Card className="sm">
+          <Card className="sm bg-lightGray">
             <CardBody className="space-y-4">
               <Button color="primary" onPress={onOpen}>
                 Search
@@ -370,7 +370,7 @@ function Search() {
         </Modal>
         <div className="col-span-3">
           {!makeSearch && profiles.length > 0 && (
-            <Card className="sm">
+            <Card className="sm bg-lightGray">
               <CardBody>
                 <p>
                   <b>Selected Profiles: </b> {selectedProfiles.join(", ")}
