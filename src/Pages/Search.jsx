@@ -368,7 +368,6 @@ function Search() {
             )}
           </ModalContent>
         </Modal>
-
         <div className="col-span-3">
           {!makeSearch && profiles.length > 0 && (
             <Card className="sm">

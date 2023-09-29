@@ -16,11 +16,14 @@ import {
   Checkbox,
   Input,
   Link,
+  Select,
+  SelectItem,
   Image,
 } from "@nextui-org/react";
 import avatar from "../assets/avatar.png";
 
 function AddProfiles({ setFetchProfiles }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [profiles, setProfiles] = useState([]);
   const [showPayeeFields, setShowPayeeFields] = useState(false);
   const [formData, setFormData] = useState({
@@ -58,7 +61,7 @@ function AddProfiles({ setFetchProfiles }) {
     payeeAccountNumber: "",
     ebill: false,
   });
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
     // Update the form data based on the input type
@@ -160,6 +163,34 @@ function AddProfiles({ setFetchProfiles }) {
     });
   };
 
+  const environments = [
+    { label: "DEV", value: "DEV" },
+    { label: "CERT", value: "CERT" },
+    { label: "PROD", value: "PROD" },
+  ];
+
+  const intendedUses = [
+    { label: "Sprint", value: "Sprint" },
+    { label: "Sanity", value: "Sanity" },
+    { label: "Certification", value: "Certification" },
+    { label: "Pipeline", value: "Pipeline" },
+  ];
+
+  const accountTypes = [
+    { label: "Debit", value: "Debit" },
+    { label: "Credit", value: "Credit" },
+    { label: "Deposit", value: "Deposit" },
+    { label: "Mortgage", value: "Mortgage" },
+  ];
+
+  const accountSubTypes = [
+    { label: "FHA Mortgage", value: "FHA Mortgage" },
+    { label: "Visa Icon", value: "Visa Icon" },
+    { label: "Premia Rewards", value: "Premia Rewards" },
+    { label: "Title Insurance", value: "Title Insurance" },
+    { label: "Dwelling", value: "Dwelling" },
+  ];
+
   return (
     <div className="w-full">
       <Button onPress={onOpen} size="lg" color="primary">
@@ -176,149 +207,161 @@ function AddProfiles({ setFetchProfiles }) {
               <ModalHeader>Add Profile</ModalHeader>
               <ModalBody>
                 <form className="space-y-4">
-                  <label className="block">
-                    <span className="text-gray-700">Environment:</span>
-                    <Input
-                      type="text"
-                      name="environment"
-                      value={formData.environment}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Intended Use:</span>
-                    <Input
-                      type="text"
-                      name="intendedUse"
-                      value={formData.intendedUse}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">In Use: </span>
+                  <label className="block flex justify-between items-center">
+                    <span className="text-gray-700">In Use:</span>
                     <Checkbox
-                      name="inUse"
+                      name="paymentMakePayments"
                       checked={formData.inUse}
                       onChange={handleInputChange}
                     />
                   </label>
-                  <label className="block">
-                    <span className="text-gray-700">Profile User Id:</span>
-                    <Input
-                      type="text"
-                      name="profileUserId"
-                      value={formData.profileUserId}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Username:</span>
-                    <Input
-                      type="text"
-                      name="username"
-                      value={formData.username}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Pass:</span>
-                    <Input
-                      type="text"
-                      name="pass"
-                      value={formData.pass}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Email:</span>
-                    <Input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">First Name:</span>
-                    <Input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Last Name:</span>
-                    <Input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Maiden Name:</span>
-                    <Input
-                      type="text"
-                      name="maidenName"
-                      value={formData.maidenName}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Birthdate:</span>
-                    <Input
-                      type="text"
-                      name="birthdate"
-                      value={formData.birthdate}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Account Type:</span>
-                    <Input
-                      type="text"
-                      name="accountType"
-                      value={formData.accountType}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Account Sub Type:</span>
-                    <Input
-                      type="text"
-                      name="accountSubType"
-                      value={formData.accountSubType}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Account Number:</span>
-                    <Input
-                      type="text"
-                      name="accountNumber"
-                      value={formData.accountNumber}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Account Nickname:</span>
-                    <Input
-                      type="text"
-                      name="accountNickname"
-                      value={formData.accountNickname}
-                      onChange={handleInputChange}
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Account Balance:</span>
-                    <Input
-                      type="text"
-                      name="accountBalance"
-                      value={formData.accountBalance}
-                      onChange={handleInputChange}
-                    />
-                  </label>
+                  <Select
+                    items={environments}
+                    label="Environment"
+                    onChange={handleInputChange}
+                    name="environment"
+                    value={formData.environment}
+                    placeholder="Select an environment"
+                  >
+                    {(environment) => (
+                      <SelectItem
+                        key={environment.value}
+                        value={environment.value}
+                      >
+                        {environment.label}
+                      </SelectItem>
+                    )}
+                  </Select>
+                  <Select
+                    items={intendedUses}
+                    label="Intended Use"
+                    onChange={handleInputChange}
+                    name="intendedUse"
+                    value={formData.intendedUse}
+                    placeholder="Select an intended use"
+                  >
+                    {(intendedUse) => (
+                      <SelectItem
+                        key={intendedUse.value}
+                        value={intendedUse.value}
+                      >
+                        {intendedUse.label}
+                      </SelectItem>
+                    )}
+                  </Select>
+                  <Input
+                    type="text"
+                    name="profileUserId"
+                    value={formData.profileUserId}
+                    onChange={handleInputChange}
+                    label="Profile User Id"
+                  />
+                  <Input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                    label="Username"
+                  />
+                  <Input
+                    type="text"
+                    name="pass"
+                    value={formData.pass}
+                    onChange={handleInputChange}
+                    label="Password"
+                  />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    label="Email"
+                  />
+                  <Input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    label="First Name"
+                  />
+                  <Input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    label="Last Name"
+                  />
+                  <Input
+                    type="text"
+                    name="maidenName"
+                    value={formData.maidenName}
+                    onChange={handleInputChange}
+                    label="Maiden Name"
+                  />
+                  <Input
+                    type="date"
+                    name="birthdate"
+                    value={formData.birthdate}
+                    onChange={handleInputChange}
+                    label="Birthdate"
+                    labelPlacement="outside-left"
+                  />
+                  <Select
+                    items={accountTypes}
+                    label="Account Type"
+                    onChange={handleInputChange}
+                    name="accountType"
+                    value={formData.accountType}
+                    placeholder="Select an account type"
+                  >
+                    {(accountType) => (
+                      <SelectItem
+                        key={accountType.value}
+                        value={accountType.value}
+                      >
+                        {accountType.label}
+                      </SelectItem>
+                    )}
+                  </Select>
+                  <Select
+                    items={accountSubTypes}
+                    label="Account Sub Type"
+                    onChange={handleInputChange}
+                    name="accountSubType"
+                    value={formData.accountSubType}
+                    placeholder="Select an account sub type"
+                  >
+                    {(accountSubType) => (
+                      <SelectItem
+                        key={accountSubType.value}
+                        value={accountSubType.value}
+                      >
+                        {accountSubType.label}
+                      </SelectItem>
+                    )}
+                  </Select>
+
+                  <Input
+                    type="text"
+                    name="accountNumber"
+                    value={formData.accountNumber}
+                    onChange={handleInputChange}
+                    label="Account Number"
+                  />
+                  <Input
+                    type="text"
+                    name="accountNickname"
+                    value={formData.accountNickname}
+                    onChange={handleInputChange}
+                    label="Account Nickname"
+                  />
+                  <Input
+                    type="text"
+                    name="accountBalance"
+                    value={formData.accountBalance}
+                    onChange={handleInputChange}
+                    label="Account Balance"
+                  />
                   <label className="block flex justify-between items-center">
                     <span className="text-gray-700">
                       Personal Information Email:
@@ -441,35 +484,27 @@ function AddProfiles({ setFetchProfiles }) {
                   </label>
                   {showPayeeFields && (
                     <>
-                      <label className="block">
-                        <span className="text-gray-700">Nickname:</span>
-                        <Input
-                          type="text"
-                          name="nickname"
-                          value={formData.nickname}
-                          onChange={handleInputChange}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-gray-700">Payee Name:</span>
-                        <Input
-                          type="text"
-                          name="payeeName"
-                          value={formData.payeeName}
-                          onChange={handleInputChange}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-gray-700">
-                          Payee Account Number:
-                        </span>
-                        <Input
-                          type="text"
-                          name="payeeAccountNumber"
-                          value={formData.payeeAccountNumber}
-                          onChange={handleInputChange}
-                        />
-                      </label>
+                      <Input
+                        type="text"
+                        name="nickname"
+                        value={formData.nickname}
+                        onChange={handleInputChange}
+                        label="Nickname"
+                      />
+                      <Input
+                        type="text"
+                        name="payeeName"
+                        value={formData.payeeName}
+                        onChange={handleInputChange}
+                        label="Payee Name"
+                      />
+                      <Input
+                        type="text"
+                        name="payeeAccountNumber"
+                        value={formData.payeeAccountNumber}
+                        onChange={handleInputChange}
+                        label="Payee Account Number"
+                      />
                       <label className="block flex justify-between items-center">
                         <span className="text-gray-700">E-Bill:</span>
                         <Checkbox
