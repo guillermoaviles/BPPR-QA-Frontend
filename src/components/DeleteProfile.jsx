@@ -20,7 +20,7 @@ function DeleteProfile({ selectedProfile, setFetchProfiles }) {
     <div>
       <Button
         color="danger"
-        className=" left-3 cursor-pointer"
+        className="left-3 cursor-pointer"
         variant="ghost"
         onPress={handleDelete}
       >

@@ -233,6 +233,7 @@ function AddProfiles({ setFetchProfiles }) {
                     )}
                   </Select>
                   <Select
+                    isRequired
                     items={intendedUses}
                     label="Intended Use"
                     onChange={handleInputChange}
@@ -250,6 +251,7 @@ function AddProfiles({ setFetchProfiles }) {
                     )}
                   </Select>
                   <Input
+                    isRequired
                     type="text"
                     name="profileUserId"
                     value={formData.profileUserId}
@@ -257,6 +259,7 @@ function AddProfiles({ setFetchProfiles }) {
                     label="Profile User Id"
                   />
                   <Input
+                    isRequired
                     type="text"
                     name="username"
                     value={formData.username}
@@ -307,6 +310,7 @@ function AddProfiles({ setFetchProfiles }) {
                     labelPlacement="outside-left"
                   />
                   <Select
+                  isRequired
                     items={accountTypes}
                     label="Account Type"
                     onChange={handleInputChange}
@@ -522,6 +526,7 @@ function AddProfiles({ setFetchProfiles }) {
                   Cancel
                 </Button>
                 <Button
+                isDisabled={formData.intendedUse === "" && formData.profileUserId === "" && formData.username === "" && formData.accountType === ""}
                   auto
                   color="success"
                   className="text-white"
@@ -539,12 +544,14 @@ function AddProfiles({ setFetchProfiles }) {
       </Modal>
       <div className="mt-8 w-full mb-8">
         {profiles.length > 0 && (
-          <Card className="bg-lightBlue">
+          <Card className="bg-lightGray">
             <div className="font-bold text-xl m-4">
               Profiles to Add: ({profiles.length})
             </div>
             <div className="flex flex-col self-center m-4 w-48">
               <Button
+              color="primary"
+              
                 className="text-white cursor-pointer"
                 onClick={handleCreateProfiles}
               >
@@ -555,12 +562,14 @@ function AddProfiles({ setFetchProfiles }) {
                 )}
               </Button>
               <Button
+              color="primary"
                 className="text-white cursor-pointer mt-2"
                 onClick={handleCreateJSONs}
               >
                 {profiles.length > 1 ? <p>Create JSONs</p> : <p>Create JSON</p>}
               </Button>
               <Button
+              color="primary"
                 className="text-white cursor-pointer mt-2"
                 onClick={handleCreateBoth}
               >
