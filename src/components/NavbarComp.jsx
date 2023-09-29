@@ -38,14 +38,15 @@ export default function NavbarComp() {
         {isLoggedIn && (
           <>
             <NavbarContent className="hidden sm:flex gap-8">
+              
+            </NavbarContent>
+            <NavbarContent justify="end">
               <NavbarItem isActive={isActive("/")}>
             <Link to="/">Home</Link>
           </NavbarItem>
           <NavbarItem isActive={isActive("/search")}>
             <Link to="/search">Search</Link>
           </NavbarItem>
-            </NavbarContent>
-            <NavbarContent justify="end">
               <NavbarItem>
                 <Button
                   className=""
