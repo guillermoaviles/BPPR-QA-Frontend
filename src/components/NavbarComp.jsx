@@ -28,25 +28,23 @@ export default function NavbarComp() {
         <NavbarBrand>
           <Link to="/">
             <img
-            src={internaltools}
-            alt="BPPR Internal Tools"
-            width="200"
-            height="200"
-             />
+              src={internaltools}
+              alt="BPPR Internal Tools"
+              width="200"
+              height="200"
+            />
           </Link>
         </NavbarBrand>
         {isLoggedIn && (
           <>
-            <NavbarContent className="hidden sm:flex gap-8">
-              
-            </NavbarContent>
+            <NavbarContent className="hidden sm:flex gap-8"></NavbarContent>
             <NavbarContent justify="end">
               <NavbarItem isActive={isActive("/")}>
-            <Link to="/">Home</Link>
-          </NavbarItem>
-          <NavbarItem isActive={isActive("/search")}>
-            <Link to="/search">Search</Link>
-          </NavbarItem>
+                <Link className="text-[#00a8e0]" to="/">Home</Link>
+              </NavbarItem>
+              <NavbarItem isActive={isActive("/search")}>
+                <Link className="text-[#00a8e0]" to="/search">Search</Link>
+              </NavbarItem>
               <NavbarItem>
                 <Button
                   className=""
