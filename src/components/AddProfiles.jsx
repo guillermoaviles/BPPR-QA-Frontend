@@ -502,13 +502,13 @@ function AddProfiles({ setFetchProfiles }) {
           )}
         </ModalContent>
       </Modal>
-      <div className="mt-4 w-full">
+      <div className="mt-8 w-full mb-8">
         {profiles.length > 0 && (
-          <Card className="">
+          <Card>
             <div className="font-bold text-xl m-4">
               Profiles to Add: ({profiles.length})
             </div>
-            <div className="flex flex-col m-4">
+            <div className="flex flex-col self-center m-4 w-48">
               <Button
                 className="text-white cursor-pointer"
                 onClick={handleCreateProfiles}
@@ -536,9 +536,9 @@ function AddProfiles({ setFetchProfiles }) {
                 )}
               </Button>
             </div>
-            <div>
+            <div className="w-60% grid grid-cols-3 gap-4 p-4">
               {profiles?.map((profile, index) => (
-                <div className="m-4">
+                <div>
                   <Card key={index} className="">
                     <CardHeader className="">
                       <Image
@@ -552,9 +552,7 @@ function AddProfiles({ setFetchProfiles }) {
                     <Divider />
                     <CardBody>
                       <div className="flex space-x-4 text-small items-center">
-                        <div className="text-gray-700 font-bold">
-                          User Id:
-                        </div>
+                        <div className="text-gray-700 font-bold">User Id:</div>
                         <div>{" " + profile.profileUserId}</div>
                       </div>
                       <div className="flex space-x-4 text-small items-center">
@@ -564,7 +562,8 @@ function AddProfiles({ setFetchProfiles }) {
                       <div className="flex space-x-4 text-small items-center">
                         <div className="text-gray-700 font-bold">
                           Account Type:
-                        </div>                        <div>{profile.accountType}</div>
+                        </div>{" "}
+                        <div>{profile.accountType}</div>
                       </div>
                     </CardBody>
                     <Divider />
@@ -581,7 +580,6 @@ function AddProfiles({ setFetchProfiles }) {
                 </div>
               ))}
             </div>
-            
           </Card>
         )}
       </div>

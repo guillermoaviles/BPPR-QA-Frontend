@@ -91,7 +91,7 @@ function Search() {
         `http://localhost:8080/api/profiles/search?${search}`
       );
       setProfiles(response.data);
-      setMakeSearch(false)
+      setMakeSearch(false);
     } catch (error) {
       console.error("Failed to fetch profiles", error);
     }
@@ -171,9 +171,9 @@ function Search() {
   };
 
   return (
-    <div className="h-screen pt-36 bg-app p-8">
-      <div className="grid grid-cols-4 gap-4">
-        <div>
+    <div className="pt-32 bg-app p-8">
+      <div className="flex flex-col max-w-4xl m-auto">
+        <div className="w-[325px] m-auto pb-16">
           <Card className="sm">
             <CardBody className="space-y-4">
               <Button color="primary" onPress={onOpen}>
@@ -182,197 +182,201 @@ function Search() {
               <ExportProfiles selectedProfiles={selectedProfiles} />
             </CardBody>
           </Card>
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            scrollBehavior="outside"
-          >
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <ModalHeader>Filter Profiles</ModalHeader>
-                  <ModalBody>
-                    <div className="flex flex-col items-center space-y-2 my-8">
-                      <Checkbox
-                        type="checkbox"
-                        name="inUse"
-                        checked={params.inUse}
-                        placeholder="In Use"
-                        onChange={handleInputChange}
-                        id="inUse"
-                      >
-                        In Use
-                      </Checkbox>
-                      <Select
-                        items={environments}
-                        label="Environment"
-                        onChange={handleInputChange}
-                        name="environment"
-                        value={params.environment}
-                        placeholder="Select an environment"
-                      >
-                        {(environment) => (
-                          <SelectItem
-                            key={environment.value}
-                            value={environment.value}
-                          >
-                            {environment.label}
-                          </SelectItem>
-                        )}
-                      </Select>
-                      <Select
-                        items={intendedUses}
-                        label="Intended Use"
-                        onChange={handleInputChange}
-                        name="intendedUse"
-                        value={params.intendedUse}
-                        placeholder="Select an intended use"
-                      >
-                        {(intendedUse) => (
-                          <SelectItem
-                            key={intendedUse.value}
-                            value={intendedUse.value}
-                          >
-                            {intendedUse.label}
-                          </SelectItem>
-                        )}
-                      </Select>
-                      <Input
-                        type="text"
-                        name="profileUserId"
-                        value={params.profileUserId}
-                        placeholder="Profile User Id"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="username"
-                        value={params.username}
-                        placeholder="Username"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="pass"
-                        value={params.pass}
-                        placeholder="Password"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="email"
-                        value={params.email}
-                        placeholder="Email"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="firstName"
-                        value={params.firstName}
-                        placeholder="First Name"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="lastName"
-                        value={params.lastName}
-                        placeholder="Last Name"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="maidenName"
-                        value={params.maidenName}
-                        placeholder="Maiden Name"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="date"
-                        name="birthdate"
-                        value={params.birthdate}
-                        placeholder="Birthdate"
-                        onChange={handleInputChange}
-                      />
-                      <Select
-                        items={accountTypes}
-                        label="Account Type"
-                        onChange={handleInputChange}
-                        name="accountType"
-                        value={params.accountType}
-                        placeholder="Select an account type"
-                      >
-                        {(accountType) => (
-                          <SelectItem
-                            key={accountType.value}
-                            value={accountType.value}
-                          >
-                            {accountType.label}
-                          </SelectItem>
-                        )}
-                      </Select>
-                      <Select
-                        items={accountSubTypes}
-                        label="Account Sub Type"
-                        onChange={handleInputChange}
-                        name="accountSubType"
-                        value={params.accountSubType}
-                        placeholder="Select an account sub type"
-                      >
-                        {(accountSubType) => (
-                          <SelectItem
-                            key={accountSubType.value}
-                            value={accountSubType.value}
-                          >
-                            {accountSubType.label}
-                          </SelectItem>
-                        )}
-                      </Select>
-                      <Input
-                        type="text"
-                        name="accountNumber"
-                        value={params.accountNumber}
-                        placeholder="Account Number"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="accountNickname"
-                        value={params.accountNickname}
-                        placeholder="Account Nickname"
-                        onChange={handleInputChange}
-                      />
-                      <Input
-                        type="text"
-                        name="accountBalance"
-                        value={params.accountBalance}
-                        placeholder="Account Balance"
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button auto onClick={onClose} color="danger">
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        fetchProfiles();
-                        onClose();
-                      }}
-                    >
-                      Filter
-                    </Button>
-                  </ModalFooter>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
         </div>
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          scrollBehavior="outside"
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader>Filter Profiles</ModalHeader>
+                <ModalBody>
+                  <div className="flex flex-col items-center space-y-2 my-8">
+                    <Checkbox
+                      type="checkbox"
+                      name="inUse"
+                      checked={params.inUse}
+                      placeholder="In Use"
+                      onChange={handleInputChange}
+                      id="inUse"
+                    >
+                      In Use
+                    </Checkbox>
+                    <Select
+                      items={environments}
+                      label="Environment"
+                      onChange={handleInputChange}
+                      name="environment"
+                      value={params.environment}
+                      placeholder="Select an environment"
+                    >
+                      {(environment) => (
+                        <SelectItem
+                          key={environment.value}
+                          value={environment.value}
+                        >
+                          {environment.label}
+                        </SelectItem>
+                      )}
+                    </Select>
+                    <Select
+                      items={intendedUses}
+                      label="Intended Use"
+                      onChange={handleInputChange}
+                      name="intendedUse"
+                      value={params.intendedUse}
+                      placeholder="Select an intended use"
+                    >
+                      {(intendedUse) => (
+                        <SelectItem
+                          key={intendedUse.value}
+                          value={intendedUse.value}
+                        >
+                          {intendedUse.label}
+                        </SelectItem>
+                      )}
+                    </Select>
+                    <Input
+                      type="text"
+                      name="profileUserId"
+                      value={params.profileUserId}
+                      placeholder="Profile User Id"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="username"
+                      value={params.username}
+                      placeholder="Username"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="pass"
+                      value={params.pass}
+                      placeholder="Password"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="email"
+                      value={params.email}
+                      placeholder="Email"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="firstName"
+                      value={params.firstName}
+                      placeholder="First Name"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="lastName"
+                      value={params.lastName}
+                      placeholder="Last Name"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="maidenName"
+                      value={params.maidenName}
+                      placeholder="Maiden Name"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="date"
+                      name="birthdate"
+                      value={params.birthdate}
+                      placeholder="Birthdate"
+                      onChange={handleInputChange}
+                    />
+                    <Select
+                      items={accountTypes}
+                      label="Account Type"
+                      onChange={handleInputChange}
+                      name="accountType"
+                      value={params.accountType}
+                      placeholder="Select an account type"
+                    >
+                      {(accountType) => (
+                        <SelectItem
+                          key={accountType.value}
+                          value={accountType.value}
+                        >
+                          {accountType.label}
+                        </SelectItem>
+                      )}
+                    </Select>
+                    <Select
+                      items={accountSubTypes}
+                      label="Account Sub Type"
+                      onChange={handleInputChange}
+                      name="accountSubType"
+                      value={params.accountSubType}
+                      placeholder="Select an account sub type"
+                    >
+                      {(accountSubType) => (
+                        <SelectItem
+                          key={accountSubType.value}
+                          value={accountSubType.value}
+                        >
+                          {accountSubType.label}
+                        </SelectItem>
+                      )}
+                    </Select>
+                    <Input
+                      type="text"
+                      name="accountNumber"
+                      value={params.accountNumber}
+                      placeholder="Account Number"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="accountNickname"
+                      value={params.accountNickname}
+                      placeholder="Account Nickname"
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="text"
+                      name="accountBalance"
+                      value={params.accountBalance}
+                      placeholder="Account Balance"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button auto onClick={onClose} color="danger">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      fetchProfiles();
+                      onClose();
+                    }}
+                  >
+                    Filter
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+
         <div className="col-span-3">
           {!makeSearch && profiles.length > 0 && (
             <Card className="sm">
               <CardBody>
-                <div className="space-y-4">
+                <p>
+                  <b>Selected Profiles: </b> {selectedProfiles.join(", ")}
+                </p>
+                <div className="space-y-4 p-8">
                   {profiles.map((profile) => (
                     <div key={profile?.id}>
                       <Card isBlurred shadow="sm">
@@ -495,11 +499,6 @@ function Search() {
                   ))}
                 </div>
               </CardBody>
-              <CardFooter className="p-8">
-                <p>
-                  <b>Selected Profiles: </b> {selectedProfiles.join(", ")}
-                </p>
-              </CardFooter>
             </Card>
           )}
         </div>
